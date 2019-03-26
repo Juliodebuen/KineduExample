@@ -1,10 +1,10 @@
-package com.example.kineduexample.entities;
+package com.example.kineduexample.data.network.model;
 
 import com.google.gson.annotations.SerializedName;
 
 public class ArticlesIndex {
     @SerializedName("data")
-    DataArticles data;
+    private DataArticles data;
 
     @SerializedName("meta")
     Meta meta;

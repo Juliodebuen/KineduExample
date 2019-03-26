@@ -1,8 +1,8 @@
-package com.example.kineduexample.entities;
+package com.example.kineduexample.data.network.model;
 
 import com.google.gson.annotations.SerializedName;
 
-class DataArticles {
+public class DataArticles {
     @SerializedName("articles")
     Articles articles;
 

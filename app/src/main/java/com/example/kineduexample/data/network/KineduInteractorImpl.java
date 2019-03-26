@@ -1,7 +1,7 @@
-package com.example.kineduexample.api;
+package com.example.kineduexample.data.network;
 
-import com.example.kineduexample.entities.ActivitiesIndex;
-import com.example.kineduexample.entities.ArticlesIndex;
+import com.example.kineduexample.data.network.model.ActivitiesIndex;
+import com.example.kineduexample.data.network.model.ArticlesIndex;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
