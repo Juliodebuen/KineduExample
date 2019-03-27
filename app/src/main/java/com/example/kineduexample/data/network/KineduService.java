@@ -1,6 +1,7 @@
 package com.example.kineduexample.data.network;
 
 import com.example.kineduexample.data.network.model.ActivitiesIndex;
+import com.example.kineduexample.data.network.model.ArticleDetail;
 import com.example.kineduexample.data.network.model.ArticlesIndex;
 
 import retrofit2.Call;
@@ -16,6 +17,6 @@ public interface KineduService {
     @GET("catalogue/articles?skill_id=5&baby_id=2064732")
     Call<ArticlesIndex> getArticles(@Header("Authorization") String token);
 
-    @GET("http://staging.kinedu.com/api/v3/articles/{articleId}")
-    Call<ArticlesIndex> getArticleDetails(@Header("Authorization") String token, @Path("articleId") Integer articleId);
+    @GET("articles/{article_id}")
+    Call<ArticleDetail> getArticleDetails(@Header("Authorization") String token, @Path("article_id") Integer articleId);
 }
