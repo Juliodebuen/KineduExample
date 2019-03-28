@@ -27,12 +27,27 @@
                     android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/padding"
+                    android:paddingLeft="@dimen/padding"
+                    android:paddingRight="@dimen/padding"
+                    android:textStyle="bold"
+                    android:textColor="@color/title_activities"
+                    android:textSize="@dimen/subtitle"
                     />
                 <TextView
                     android:id="@+id/purpose"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="@dimen/padding"
+                    android:textSize="@dimen/normal"
                     />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/milestones_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

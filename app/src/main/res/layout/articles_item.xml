@@ -6,6 +6,7 @@
         android:id="@+id/article_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/padding"
         android:padding="@dimen/padding"
         android:elevation="@dimen/padding">
         <LinearLayout
@@ -22,6 +23,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/title"
+                android:textColor="@color/title_activities"
+                android:textStyle="bold"
                 android:paddingLeft="@dimen/padding"
                 android:paddingRight="@dimen/padding"/>
             <TextView
@@ -30,7 +33,8 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/normal"
                 android:paddingLeft="@dimen/padding"
-                android:paddingRight="@dimen/padding"/>
+                android:paddingRight="@dimen/padding"
+                android:layout_marginBottom="@dimen/padding"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </LinearLayout>

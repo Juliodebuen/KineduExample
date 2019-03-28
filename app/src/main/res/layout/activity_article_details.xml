@@ -51,7 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/dialog_text"
-                android:padding="@dimen/padding"/>
+                android:padding="@dimen/double_padding"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

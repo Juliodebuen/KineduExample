@@ -76,7 +76,7 @@ public class ActivitesFragment extends Fragment implements ActivitiesView{
     @Override
     public void onLoadBitmaps(List<Bitmap> bitmaps) {
         if(activitiesList != null && activitiesList.size() > 0){
-            ActivitiesAdapter adapter = new ActivitiesAdapter(activitiesList, bitmaps);
+            ActivitiesAdapter adapter = new ActivitiesAdapter(getContext(), activitiesList, bitmaps);
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
             linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
             mRecyclerView.setAdapter(adapter);

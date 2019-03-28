@@ -18,13 +18,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:background="@color/skyblue">
+                android:background="@color/skyblue"
+                android:gravity="center">
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:layout_marginTop="@dimen/padding"
-                    android:layout_marginLeft="@dimen/padding"
+                    android:layout_marginLeft="@dimen/double_padding"
                     android:layout_marginRight="0dp"
                     android:layout_marginBottom="@dimen/padding">
                     <ImageView
@@ -43,6 +44,8 @@
                         android:textColor="@color/white"
                         android:textSize="@dimen/subtitle"
                         android:layout_marginBottom="@dimen/padding"
+                        android:layout_marginTop="@dimen/padding"
+                        android:textStyle="bold"
                         android:text="@string/how_is_fwefew"/>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -50,18 +53,22 @@
                         android:orientation="horizontal"
                         android:layout_gravity="right"
                         android:gravity="right"
-                        android:paddingTop="@dimen/padding"
-                        android:paddingBottom="@dimen/half_padding">
+                        android:paddingTop="@dimen/double_padding"
+                        android:paddingBottom="@dimen/padding">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
                             android:textSize="@dimen/normal"
                             android:text="@string/learn_more"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="@dimen/padding"
                             />
                         <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:layout_width="@dimen/arrowSize"
+                            android:layout_height="@dimen/arrowSize"
+                            android:scaleType="centerInside"
+                            android:layout_marginRight="@dimen/padding"
                             android:src="@drawable/ic_arrow_right"/>
                     </LinearLayout>
 
