@@ -9,6 +9,15 @@ import androidx.lifecycle.ViewModel;
 
 public class MainViewModel extends ViewModel {
     private final MutableLiveData<List<Activities>> activities = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> showDialog = new MutableLiveData<>();
+
+    public void setShowDialog(Boolean showDialog){
+        this.showDialog.postValue(showDialog);
+    }
+
+    public MutableLiveData<Boolean> getShowDialog(){
+        return showDialog;
+    }
 
     public void setActivities(List<Activities> activities){
         this.activities.postValue(activities);

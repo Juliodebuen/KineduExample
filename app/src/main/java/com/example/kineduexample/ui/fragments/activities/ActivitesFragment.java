@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -35,6 +36,9 @@ public class ActivitesFragment extends Fragment implements ActivitiesView{
     @BindView(R.id.activitiesRecyclerView)
     RecyclerView mRecyclerView;
 
+    @BindView(R.id.swipeRefresh)
+    SwipeRefreshLayout swipeRefresh;
+
     public static ActivitesFragment newInstance() {
         return new ActivitesFragment();
     }
@@ -51,19 +55,14 @@ public class ActivitesFragment extends Fragment implements ActivitiesView{
         presenter.bind(this);
 
         presenter.searchActivities();
+        mMainViewModel.setShowDialog(true);
 
-      /*  mMainViewModel.getActivities().observe(this, new Observer<List<Activities>>() {
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onChanged(List<Activities> activities) {
-                if(activities != null && activities.size() > 0){
-                    ActivitiesAdapter adapter = new ActivitiesAdapter(activities);
-                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-                    linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
-                    mRecyclerView.setAdapter(adapter);
-                    mRecyclerView.setLayoutManager(linearLayoutManager);
-                }
+            public void onRefresh() {
+                presenter.searchActivities();
             }
-        });*/
+        });
 
         return rootView;
     }
@@ -82,6 +81,8 @@ public class ActivitesFragment extends Fragment implements ActivitiesView{
             linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
             mRecyclerView.setAdapter(adapter);
             mRecyclerView.setLayoutManager(linearLayoutManager);
+            mMainViewModel.setShowDialog(false);
+            swipeRefresh.setRefreshing(false);
         }
     }
 

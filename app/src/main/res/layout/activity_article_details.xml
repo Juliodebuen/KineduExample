@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -34,13 +33,13 @@
                         android:layout_weight="9"
                         android:textSize="@dimen/title"
                         android:textAlignment="center"
-                        android:textColor="@color/white"
-                        android:text="Motor milestones: why tummy time is so important"/>
+                        android:textStyle="bold"
+                        android:textColor="@color/white"/>
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:src="@drawable/ic_share"
-                        android:tint="@color/skyblue"
+                        android:tint="@color/sharebtn"
                         android:layout_gravity="center"
                         android:layout_marginRight="@dimen/padding"
                         android:layout_marginLeft="@dimen/padding"
@@ -51,6 +50,7 @@
                 android:id="@+id/body"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/dialog_text"
                 android:padding="@dimen/padding"/>
         </LinearLayout>
     </ScrollView>

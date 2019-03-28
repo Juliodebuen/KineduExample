@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,10 +16,11 @@ import com.example.kineduexample.R;
 import com.example.kineduexample.data.network.KineduInteractor;
 import com.example.kineduexample.data.network.KineduInteractorImpl;
 import com.example.kineduexample.data.network.model.ArticleDetail;
+import com.example.kineduexample.ui.base.BaseActivity;
 
 import java.util.List;
 
-public class ArticleDetailsActivity extends AppCompatActivity implements ArticleDetailsView{
+public class ArticleDetailsActivity extends BaseActivity implements ArticleDetailsView{
     private KineduInteractor interactor;
     private ArticleDetailsPresenter presenter;
 
@@ -39,6 +41,8 @@ public class ArticleDetailsActivity extends AppCompatActivity implements Article
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article_details);
         ButterKnife.bind(this);
+        setProgressDialog(getString(R.string.loading));
+
 
         interactor = new KineduInteractorImpl();
         presenter = new ArticleDetailsPresenter(interactor);
@@ -48,6 +52,7 @@ public class ArticleDetailsActivity extends AppCompatActivity implements Article
         if(extras != null){
             articleId = extras.getInt("articleId");
             presenter.searchArticleDetails(articleId);
+            showProgressDialog();
         }
     }
 
@@ -61,12 +66,14 @@ public class ArticleDetailsActivity extends AppCompatActivity implements Article
     @Override
     public void onLoadBitmaps(List<Bitmap> bitmap) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            body.setText(Html.fromHtml(articleDetail.getBody(), Html.FROM_HTML_MODE_COMPACT));
+            body.setText(Html.fromHtml(articleDetail.getBody(), Html.FROM_HTML_MODE_LEGACY));
         } else {
             body.setText(Html.fromHtml(articleDetail.getBody()));
         }
+        body.setMovementMethod(LinkMovementMethod.getInstance());
 
         title.setText(articleDetail.getTitle());
         picture.setImageBitmap(bitmap.get(0));
+        hideProgressDialog();
     }
 }

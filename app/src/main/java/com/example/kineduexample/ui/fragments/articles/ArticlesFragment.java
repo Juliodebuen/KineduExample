@@ -9,13 +9,13 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.kineduexample.R;
 import com.example.kineduexample.data.network.KineduInteractor;
@@ -41,6 +41,9 @@ public class ArticlesFragment extends Fragment implements ArticlesView, OnArticl
     @BindView(R.id.articlesRecyclerView)
     RecyclerView mRecyclerView;
 
+    @BindView(R.id.swipeRefresh)
+    SwipeRefreshLayout swipeRefresh;
+
     public static ArticlesFragment newInstance() {
         return  new ArticlesFragment();
     }
@@ -58,6 +61,15 @@ public class ArticlesFragment extends Fragment implements ArticlesView, OnArticl
         presenter.bind(this);
 
         presenter.searchArticles();
+        mMainViewModel.setShowDialog(true);
+
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                presenter.searchArticles();
+            }
+        });
+
         return rootView;
     }
 
@@ -76,6 +88,8 @@ public class ArticlesFragment extends Fragment implements ArticlesView, OnArticl
             linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
             mRecyclerView.setAdapter(adapter);
             mRecyclerView.setLayoutManager(linearLayoutManager);
+            mMainViewModel.setShowDialog(false);
+            swipeRefresh.setRefreshing(false);
         }
     }
 

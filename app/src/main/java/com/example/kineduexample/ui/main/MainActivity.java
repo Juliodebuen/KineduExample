@@ -1,6 +1,8 @@
 package com.example.kineduexample.ui.main;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
@@ -8,20 +10,21 @@ import butterknife.ButterKnife;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ProgressBar;
 
 import com.example.kineduexample.R;
 import com.example.kineduexample.data.network.KineduInteractor;
 import com.example.kineduexample.data.network.KineduInteractorImpl;
 import com.example.kineduexample.data.network.model.DataActivities;
+import com.example.kineduexample.ui.base.BaseActivity;
 import com.example.kineduexample.ui.fragments.MainViewModel;
 import com.google.android.material.tabs.TabLayout;
 
-public class MainActivity extends AppCompatActivity implements MainView {
+public class MainActivity extends BaseActivity implements MainView {
     private KineduInteractor interactor;
     private MainPresenter presenter;
     private ViewPagerAdapter viewPagerAdapter;
     private MainViewModel mMainViewModel;
-
 
     @BindView(R.id.viewpager)
     ViewPager viewPager;
@@ -35,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         mMainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
-
+        setProgressDialog(getString(R.string.loading));
 
         interactor = new KineduInteractorImpl();
         presenter = new MainPresenter(interactor);
@@ -48,6 +51,18 @@ public class MainActivity extends AppCompatActivity implements MainView {
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), this);
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
+
+
+        mMainViewModel.getShowDialog().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if(aBoolean){
+                    showProgressDialog();
+                }else{
+                    hideProgressDialog();
+                }
+            }
+        });
     }
 
     @Override

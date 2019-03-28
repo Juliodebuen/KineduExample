@@ -68,10 +68,16 @@
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/activitiesRecyclerView"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefresh"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:listitem="@layout/activities_item"/>
+            android:layout_height="wrap_content">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/activitiesRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:listitem="@layout/activities_item"/>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
     </LinearLayout>
 </FrameLayout>

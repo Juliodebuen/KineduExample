@@ -15,10 +15,9 @@
                 android:layout_height="wrap_content">
                 <ImageView
                     android:id="@+id/thumbnail"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/baby_crawling"/>
+                    android:layout_width="@dimen/thumbnail"
+                    android:layout_height="@dimen/thumbnail"
+                    android:scaleType="centerCrop" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
