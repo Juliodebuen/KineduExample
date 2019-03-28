@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">KineduExample</string>
     <string name="activities">Activities</string>
-    <string name="acticles">Articles</string>
+    <string name="articles">Articles</string>
     <string name="how_is_fwefew">How is fwefew doing in this skill?</string>
     <string name="learn_more">Learn more</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

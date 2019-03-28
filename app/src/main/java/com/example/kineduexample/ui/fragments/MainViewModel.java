@@ -1,4 +1,4 @@
-package com.example.kineduexample.ui.main.fragments;
+package com.example.kineduexample.ui.fragments;
 
 import com.example.kineduexample.data.network.model.Activities;
 

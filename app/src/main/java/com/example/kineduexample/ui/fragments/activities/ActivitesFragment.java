@@ -1,8 +1,8 @@
-package com.example.kineduexample.ui.main.fragments;
+package com.example.kineduexample.ui.fragments.activities;
 
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,14 +18,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.kineduexample.R;
+import com.example.kineduexample.data.network.KineduInteractor;
+import com.example.kineduexample.data.network.KineduInteractorImpl;
 import com.example.kineduexample.data.network.model.Activities;
-import com.example.kineduexample.ui.main.adapter.ActivitiesAdapter;
+import com.example.kineduexample.ui.fragments.activities.adapter.ActivitiesAdapter;
+import com.example.kineduexample.ui.fragments.MainViewModel;
 
 import java.util.List;
 
-public class ActivitesFragment extends Fragment {
-
+public class ActivitesFragment extends Fragment implements ActivitiesView{
+    private KineduInteractor interactor;
+    private ActivitiesPresenter presenter;
     private MainViewModel mMainViewModel;
+    private List<Activities> activitiesList;
 
     @BindView(R.id.activitiesRecyclerView)
     RecyclerView mRecyclerView;
@@ -41,7 +46,13 @@ public class ActivitesFragment extends Fragment {
         ButterKnife.bind(this, rootView);
         mMainViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
 
-        mMainViewModel.getActivities().observe(this, new Observer<List<Activities>>() {
+        interactor = new KineduInteractorImpl();
+        presenter = new ActivitiesPresenter(interactor);
+        presenter.bind(this);
+
+        presenter.searchActivities();
+
+      /*  mMainViewModel.getActivities().observe(this, new Observer<List<Activities>>() {
             @Override
             public void onChanged(List<Activities> activities) {
                 if(activities != null && activities.size() > 0){
@@ -52,14 +63,31 @@ public class ActivitesFragment extends Fragment {
                     mRecyclerView.setLayoutManager(linearLayoutManager);
                 }
             }
-        });
+        });*/
 
         return rootView;
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onDestroy() {
+        presenter.unbind();
+        super.onDestroy();
     }
 
+    @Override
+    public void onLoadBitmaps(List<Bitmap> bitmaps) {
+        if(activitiesList != null && activitiesList.size() > 0){
+            ActivitiesAdapter adapter = new ActivitiesAdapter(activitiesList, bitmaps);
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+            linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
+            mRecyclerView.setAdapter(adapter);
+            mRecyclerView.setLayoutManager(linearLayoutManager);
+        }
+    }
+
+    @Override
+    public void onLoadActivities(List<Activities> activities) {
+        presenter.getImagesForActivities(activities);
+        this.activitiesList = activities;
+    }
 }

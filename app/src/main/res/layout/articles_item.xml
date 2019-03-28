@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/article_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding"
+        android:elevation="@dimen/padding">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/picture"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/picture"
+                android:scaleType="centerCrop"/>
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Motor milestones: Why tummy time is so important"
+                android:textSize="@dimen/title"
+                android:paddingLeft="@dimen/padding"
+                android:paddingRight="@dimen/padding"/>
+            <TextView
+                android:id="@+id/short_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/normal"
+                android:paddingLeft="@dimen/padding"
+                android:paddingRight="@dimen/padding"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

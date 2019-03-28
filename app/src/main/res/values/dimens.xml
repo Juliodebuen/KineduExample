@@ -5,4 +5,6 @@
     <dimen name="subtitle">15sp</dimen>
     <dimen name="normal">13sp</dimen>
     <dimen name="half_padding">4dp</dimen>
+    <dimen name="title">21sp</dimen>
+    <dimen name="picture">260dp</dimen>
 </resources>

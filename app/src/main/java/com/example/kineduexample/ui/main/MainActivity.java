@@ -13,7 +13,7 @@ import com.example.kineduexample.R;
 import com.example.kineduexample.data.network.KineduInteractor;
 import com.example.kineduexample.data.network.KineduInteractorImpl;
 import com.example.kineduexample.data.network.model.DataActivities;
-import com.example.kineduexample.ui.main.fragments.MainViewModel;
+import com.example.kineduexample.ui.fragments.MainViewModel;
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity implements MainView {
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
         presenter = new MainPresenter(interactor);
         presenter.bind(this);
 
-        presenter.searchActivities();
+        //presenter.searchActivities();
 
         //presenter.searchArticleDetails(3004);
 
@@ -52,8 +52,10 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @Override
     public void updateUI(DataActivities dataActivities) {
-        mMainViewModel.setActivities(dataActivities.getActivities());
+      /*  mMainViewModel.setActivities(dataActivities.onLoadActivities());
 
+        presenter.getImagesForActivities(dataActivities.onLoadActivities());
+        */
         Log.d("Result", dataActivities.toString());
     }
 

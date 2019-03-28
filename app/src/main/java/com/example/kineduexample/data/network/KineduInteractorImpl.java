@@ -2,6 +2,7 @@ package com.example.kineduexample.data.network;
 
 import com.example.kineduexample.data.network.model.ActivitiesIndex;
 import com.example.kineduexample.data.network.model.ArticleDetail;
+import com.example.kineduexample.data.network.model.ArticleDetailsIndex;
 import com.example.kineduexample.data.network.model.ArticlesIndex;
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -32,7 +33,7 @@ public class KineduInteractorImpl implements KineduInteractor{
     }
 
     @Override
-    public Call<ArticleDetail> getArticleDetails(Integer articleId) {
+    public Call<ArticleDetailsIndex> getArticleDetails(Integer articleId) {
         return service.getArticleDetails(token, articleId);
     }
 }

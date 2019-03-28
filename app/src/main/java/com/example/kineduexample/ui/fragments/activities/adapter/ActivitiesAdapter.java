@@ -1,5 +1,6 @@
-package com.example.kineduexample.ui.main.adapter;
+package com.example.kineduexample.ui.fragments.activities.adapter;
 
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,7 +9,6 @@ import android.widget.TextView;
 
 import com.example.kineduexample.R;
 import com.example.kineduexample.data.network.model.Activities;
-import com.example.kineduexample.ui.main.fragments.ActivitesFragment;
 
 import java.util.List;
 
@@ -17,11 +17,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesAdapter.ActivitiesViewHolder> {
+public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesAdapter.ActivitiesViewHolder>{
     List<Activities> activitiesList;
+    List<Bitmap> bitmaps;
 
-    public ActivitiesAdapter(List<Activities> activitiesList){
+    public ActivitiesAdapter(List<Activities> activitiesList, List<Bitmap> bitmaps){
         this.activitiesList = activitiesList;
+        this.bitmaps = bitmaps;
     }
 
     @NonNull
@@ -36,12 +38,14 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesAdapter.Ac
     public void onBindViewHolder(@NonNull ActivitiesViewHolder holder, int position) {
         holder.name.setText(activitiesList.get(position).getName());
         holder.purpose.setText(activitiesList.get(position).getPurpose());
+        holder.thumbnail.setImageBitmap(bitmaps.get(position));
     }
 
     @Override
     public int getItemCount() {
         return activitiesList.size();
     }
+
 
     public class ActivitiesViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.thumbnail)

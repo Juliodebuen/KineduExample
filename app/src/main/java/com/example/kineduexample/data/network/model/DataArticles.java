@@ -2,15 +2,17 @@ package com.example.kineduexample.data.network.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class DataArticles {
     @SerializedName("articles")
-    Articles articles;
+    List<Articles> articles;
 
-    public Articles getArticles() {
+    public List<Articles> getArticles() {
         return articles;
     }
 
-    public void setArticles(Articles articles) {
+    public void setArticles(List<Articles> articles) {
         this.articles = articles;
     }
 

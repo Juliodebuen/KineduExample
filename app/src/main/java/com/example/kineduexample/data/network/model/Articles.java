@@ -2,7 +2,7 @@ package com.example.kineduexample.data.network.model;
 
 import com.google.gson.annotations.SerializedName;
 
-class Articles {
+public class Articles {
     @SerializedName("type")
     private String type;
 
