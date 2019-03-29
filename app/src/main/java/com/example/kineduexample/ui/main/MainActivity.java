@@ -62,6 +62,7 @@ public class MainActivity extends BaseActivity implements MainView {
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), this);
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
+        ageSpinner.setOnItemSelectedListener(listener);
 
         mMainViewModel.getShowDialog().observe(this, new Observer<Boolean>() {
             @Override
@@ -74,8 +75,16 @@ public class MainActivity extends BaseActivity implements MainView {
             }
         });
 
+        mMainViewModel.getResetSpinner().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if(aBoolean){
+                    ageSpinner.setSelection(0);
+                }
+            }
+        });
 
-        ageSpinner.setOnItemSelectedListener(listener);
+
     }
 
 

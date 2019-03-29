@@ -62,6 +62,7 @@ public class ActivitesFragment extends Fragment implements ActivitiesView{
             @Override
             public void onRefresh() {
                 presenter.searchActivities();
+                mMainViewModel.setResetSpinner(true);
             }
         });
 

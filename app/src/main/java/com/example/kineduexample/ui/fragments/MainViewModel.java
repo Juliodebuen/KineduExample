@@ -9,6 +9,7 @@ public class MainViewModel extends ViewModel {
     private final MutableLiveData<List<Activities>> activities = new MutableLiveData<>();
     private final MutableLiveData<Boolean> showDialog = new MutableLiveData<>();
     private final MutableLiveData<Integer> ageFilter = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> resetSpinner = new MutableLiveData<>();
 
     public void setAgeFilter(Integer age){
         this.ageFilter.postValue(age);
@@ -32,5 +33,13 @@ public class MainViewModel extends ViewModel {
 
     public MutableLiveData<List<Activities>> getActivities(){
         return activities;
+    }
+
+    public void setResetSpinner(Boolean resetSpinner) {
+        this.resetSpinner.postValue(resetSpinner);
+    }
+
+    public MutableLiveData<Boolean> getResetSpinner(){
+        return resetSpinner;
     }
 }

@@ -71,6 +71,7 @@ public class ArticlesFragment extends Fragment implements ArticlesView, OnArticl
             @Override
             public void onRefresh() {
                 presenter.searchArticles();
+                mMainViewModel.setResetSpinner(true);
             }
         });
 
@@ -105,6 +106,7 @@ public class ArticlesFragment extends Fragment implements ArticlesView, OnArticl
             mMainViewModel.setShowDialog(false);
             swipeRefresh.setRefreshing(false);
         }
+
     }
 
     @Override
