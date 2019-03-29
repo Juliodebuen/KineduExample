@@ -63,35 +63,35 @@
                         android:visibility="gone"
                         android:layout_width="@dimen/check"
                         android:layout_height="@dimen/check"
-                        android:layout_marginRight="@dimen/padding"
+                        android:layout_marginRight="@dimen/half_padding"
                         android:src="@drawable/checked"/>
                     <ImageView
                         android:id="@+id/check2"
                         android:visibility="gone"
                         android:layout_width="@dimen/check"
                         android:layout_height="@dimen/check"
-                        android:layout_marginRight="@dimen/padding"
+                        android:layout_marginRight="@dimen/half_padding"
                         android:src="@drawable/checked"/>
                     <ImageView
                         android:id="@+id/check3"
                         android:visibility="gone"
                         android:layout_width="@dimen/check"
                         android:layout_height="@dimen/check"
-                        android:layout_marginRight="@dimen/padding"
+                        android:layout_marginRight="@dimen/half_padding"
                         android:src="@drawable/checked"/>
                     <ImageView
                         android:id="@+id/check4"
                         android:visibility="gone"
                         android:layout_width="@dimen/check"
                         android:layout_height="@dimen/check"
-                        android:layout_marginRight="@dimen/padding"
+                        android:layout_marginRight="@dimen/half_padding"
                         android:src="@drawable/checked"/>
                     <ImageView
                         android:id="@+id/check5"
                         android:visibility="gone"
                         android:layout_width="@dimen/check"
                         android:layout_height="@dimen/check"
-                        android:layout_marginRight="@dimen/padding"
+                        android:layout_marginRight="@dimen/half_padding"
                         android:src="@drawable/checked"/>
                 </LinearLayout>
             </LinearLayout>

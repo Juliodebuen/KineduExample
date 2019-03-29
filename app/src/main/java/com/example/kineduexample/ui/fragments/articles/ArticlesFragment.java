@@ -103,7 +103,7 @@ public class ArticlesFragment extends Fragment implements ArticlesView, OnArticl
             linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
             mRecyclerView.setAdapter(adapter);
             mRecyclerView.setLayoutManager(linearLayoutManager);
-            mMainViewModel.setShowDialog(false);
+           // mMainViewModel.setShowDialog(false);
             swipeRefresh.setRefreshing(false);
         }
 
