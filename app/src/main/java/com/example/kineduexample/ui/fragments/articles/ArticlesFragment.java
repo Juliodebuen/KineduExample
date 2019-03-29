@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,6 +39,7 @@ public class ArticlesFragment extends Fragment implements ArticlesView, OnArticl
     private List<Articles> articlesList;
     private MainViewModel mMainViewModel;
     private Unbinder unbinder;
+    private ArticlesAdapter adapter;
 
 
     @BindView(R.id.articlesRecyclerView)
@@ -72,6 +74,15 @@ public class ArticlesFragment extends Fragment implements ArticlesView, OnArticl
             }
         });
 
+        mMainViewModel.getAgeFilter().observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                if(adapter != null){
+                    adapter.getFilter().filter(String.valueOf(integer));
+                }
+            }
+        });
+
         return rootView;
     }
 
@@ -85,7 +96,7 @@ public class ArticlesFragment extends Fragment implements ArticlesView, OnArticl
     @Override
     public void onLoadBitmaps(List<Bitmap> bitmaps) {
         if(articlesList != null && articlesList.size() > 0){
-            ArticlesAdapter adapter = new ArticlesAdapter(articlesList, bitmaps);
+            adapter = new ArticlesAdapter(articlesList, bitmaps);
             adapter.setArticleListener(this);
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
             linearLayoutManager.setOrientation(RecyclerView.VERTICAL);

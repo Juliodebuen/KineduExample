@@ -1,8 +1,6 @@
 package com.example.kineduexample.ui.fragments.activities.adapter;
 
-import android.content.Context;
 import android.graphics.Bitmap;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,16 +27,14 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesAdapter.Ac
     private List<Bitmap> bitmaps;
     private List<Bitmap> filteredBitmaps;
     private List<Bitmap> nListBitmap;
-    private Context context;
     private ItemFilter mFilter = new ItemFilter();
 
 
-    public ActivitiesAdapter(Context context, List<Activities> activitiesList, List<Bitmap> bitmaps){
+    public ActivitiesAdapter(List<Activities> activitiesList, List<Bitmap> bitmaps){
         this.activitiesList = activitiesList;
         this.filteredData = activitiesList;
         this.bitmaps = bitmaps;
         this.filteredBitmaps = bitmaps;
-        this.context = context;
     }
 
     @NonNull

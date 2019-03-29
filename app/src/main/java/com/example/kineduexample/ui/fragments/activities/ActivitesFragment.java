@@ -74,11 +74,7 @@ public class ActivitesFragment extends Fragment implements ActivitiesView{
             @Override
             public void onChanged(Integer integer) {
                 if(adapter != null) {
-                  //  if (integer > -1) {
-                        adapter.getFilter().filter(String.valueOf(integer));
-                  //  } else {
-                   //     adapter.getFilter().filter("");
-                  //  }
+                    adapter.getFilter().filter(String.valueOf(integer));
                 }
             }
         });
@@ -96,7 +92,7 @@ public class ActivitesFragment extends Fragment implements ActivitiesView{
     @Override
     public void onLoadBitmaps(List<Bitmap> bitmaps) {
         if(activitiesList != null && activitiesList.size() > 0){
-            adapter = new ActivitiesAdapter(getContext(), activitiesList, bitmaps);
+            adapter = new ActivitiesAdapter(activitiesList, bitmaps);
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
             linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
             mRecyclerView.setAdapter(adapter);
