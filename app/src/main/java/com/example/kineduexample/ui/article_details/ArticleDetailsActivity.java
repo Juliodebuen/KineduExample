@@ -3,12 +3,16 @@ package com.example.kineduexample.ui.article_details;
 import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,6 +37,9 @@ public class ArticleDetailsActivity extends BaseActivity implements ArticleDetai
     @BindView(R.id.title)
     TextView title;
 
+     @BindView(R.id.shareImg)
+     ImageView shareImg;
+
     private int articleId;
     private ArticleDetail articleDetail;
 
@@ -54,6 +61,17 @@ public class ArticleDetailsActivity extends BaseActivity implements ArticleDetai
             presenter.searchArticleDetails(articleId);
             showProgressDialog();
         }
+
+        shareImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, articleDetail.getLink());
+                sendIntent.setType("text/plain");
+                startActivity(sendIntent);
+            }
+        });
     }
 
     @Override
@@ -65,11 +83,7 @@ public class ArticleDetailsActivity extends BaseActivity implements ArticleDetai
 
     @Override
     public void onLoadBitmaps(List<Bitmap> bitmap) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            body.setText(Html.fromHtml(articleDetail.getBody(), Html.FROM_HTML_MODE_LEGACY));
-        } else {
-            body.setText(Html.fromHtml(articleDetail.getBody()));
-        }
+        body.setText(Html.fromHtml(articleDetail.getBody(), Html.FROM_HTML_MODE_LEGACY));
         body.setMovementMethod(LinkMovementMethod.getInstance());
 
         title.setText(articleDetail.getTitle());

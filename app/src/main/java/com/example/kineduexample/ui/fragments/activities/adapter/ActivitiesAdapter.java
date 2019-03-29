@@ -44,24 +44,7 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesAdapter.Ac
         holder.name.setText(activitiesList.get(position).getName());
         holder.purpose.setText(activitiesList.get(position).getPurpose());
         holder.thumbnail.setImageBitmap(bitmaps.get(position));
-      //  for(int i = 0; i < activitiesList.get(position).getActiveMilestones(); i++){
-            LinearLayout linearLayout = new LinearLayout(context);
-            ImageView imageView = new ImageView(context);
-            imageView.setId(View.generateViewId());
-            imageView.setVisibility(View.VISIBLE);
-            imageView.setImageResource(R.drawable.baby_crawling);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            imageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-            imageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.d("asdasd", ":::::::::::");
-                }
-            });
-            linearLayout.addView(imageView);
-            holder.milestonesContainer.addView(linearLayout);
-            Log.d("doaijdsa", ":adsdasd");
-     //   }
+        holder.milestonesNumber(activitiesList.get(position).getActiveMilestones());
     }
 
     @Override
@@ -80,12 +63,39 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesAdapter.Ac
         @BindView(R.id.purpose)
         TextView purpose;
 
-        @BindView(R.id.milestones_container)
-        LinearLayout milestonesContainer;
+        @BindView(R.id.check1)
+        ImageView check1;
+
+        @BindView(R.id.check2)
+        ImageView check2;
+
+        @BindView(R.id.check3)
+        ImageView check3;
+
+        @BindView(R.id.check4)
+        ImageView check4;
+
+        @BindView(R.id.check5)
+        ImageView check5;
 
         public ActivitiesViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView.getRootView());
+        }
+
+        public void milestonesNumber(int value){
+            switch (value){
+                case 5:
+                    check1.setVisibility(View.VISIBLE);
+                case 4:
+                    check2.setVisibility(View.VISIBLE);
+                case 3:
+                    check3.setVisibility(View.VISIBLE);
+                case 2:
+                    check4.setVisibility(View.VISIBLE);
+                case 1:
+                    check5.setVisibility(View.VISIBLE);
+            }
         }
     }
 }

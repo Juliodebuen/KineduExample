@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +37,7 @@ public class ArticlesFragment extends Fragment implements ArticlesView, OnArticl
     private ArticlesPresenter presenter;
     private List<Articles> articlesList;
     private MainViewModel mMainViewModel;
+    private Unbinder unbinder;
 
 
     @BindView(R.id.articlesRecyclerView)
@@ -53,7 +55,7 @@ public class ArticlesFragment extends Fragment implements ArticlesView, OnArticl
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_articles, container, false);
-        ButterKnife.bind(this, rootView);
+        unbinder = ButterKnife.bind(this, rootView);
         mMainViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
 
         interactor = new KineduInteractorImpl();
@@ -76,6 +78,7 @@ public class ArticlesFragment extends Fragment implements ArticlesView, OnArticl
     @Override
     public void onDestroy() {
         presenter.unbind();
+        unbinder.unbind();
         super.onDestroy();
     }
 

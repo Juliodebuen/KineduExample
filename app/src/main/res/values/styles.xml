@@ -13,4 +13,9 @@
         <item name="android:textAllCaps">false</item>
     </style>
 
+    <style name="spinnerTheme">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:colorControlNormal">@color/white</item>
+    </style>
 </resources>

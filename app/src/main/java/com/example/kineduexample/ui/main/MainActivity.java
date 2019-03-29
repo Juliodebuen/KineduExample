@@ -8,9 +8,14 @@ import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.kineduexample.R;
 import com.example.kineduexample.data.network.KineduInteractor;
@@ -32,6 +37,21 @@ public class MainActivity extends BaseActivity implements MainView {
     @BindView(R.id.tabLayout)
     TabLayout tabLayout;
 
+    @BindView(R.id.ageSpinner)
+    Spinner ageSpinner;
+
+    private AdapterView.OnItemSelectedListener listener = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            ((TextView) parent.getChildAt(0)).setTextColor(Color.WHITE);
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +72,6 @@ public class MainActivity extends BaseActivity implements MainView {
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
 
-
         mMainViewModel.getShowDialog().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
@@ -63,14 +82,15 @@ public class MainActivity extends BaseActivity implements MainView {
                 }
             }
         });
+
+
+        ageSpinner.setOnItemSelectedListener(listener);
     }
+
+
 
     @Override
     public void updateUI(DataActivities dataActivities) {
-      /*  mMainViewModel.setActivities(dataActivities.onLoadActivities());
-
-        presenter.getImagesForActivities(dataActivities.onLoadActivities());
-        */
         Log.d("Result", dataActivities.toString());
     }
 

@@ -8,7 +8,8 @@
     <dimen name="half_padding">4dp</dimen>
     <dimen name="title">22sp</dimen>
     <dimen name="picture">260dp</dimen>
-    <dimen name="thumbnail">100dp</dimen>
+    <dimen name="thumbnail">120dp</dimen>
     <dimen name="dialog_text">18sp</dimen>
     <dimen name="arrowSize">20sp</dimen>
+    <dimen name="check">15dp</dimen>
 </resources>

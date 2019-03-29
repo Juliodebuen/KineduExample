@@ -13,10 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 
 import com.example.kineduexample.R;
 import com.example.kineduexample.data.network.KineduInteractor;
@@ -32,6 +35,7 @@ public class ActivitesFragment extends Fragment implements ActivitiesView{
     private ActivitiesPresenter presenter;
     private MainViewModel mMainViewModel;
     private List<Activities> activitiesList;
+    private Unbinder unbinder;
 
     @BindView(R.id.activitiesRecyclerView)
     RecyclerView mRecyclerView;
@@ -47,7 +51,7 @@ public class ActivitesFragment extends Fragment implements ActivitiesView{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.activites_fragment, container, false);
-        ButterKnife.bind(this, rootView);
+        unbinder = ButterKnife.bind(this, rootView);
         mMainViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
 
         interactor = new KineduInteractorImpl();
@@ -70,6 +74,7 @@ public class ActivitesFragment extends Fragment implements ActivitiesView{
     @Override
     public void onDestroy() {
         presenter.unbind();
+        unbinder.unbind();
         super.onDestroy();
     }
 
@@ -81,7 +86,18 @@ public class ActivitesFragment extends Fragment implements ActivitiesView{
             linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
             mRecyclerView.setAdapter(adapter);
             mRecyclerView.setLayoutManager(linearLayoutManager);
-            mMainViewModel.setShowDialog(false);
+            mRecyclerView.getViewTreeObserver()
+                    .addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                        @Override
+                        public void onGlobalLayout() {
+                            //At this point the layout is complete and the
+                            //dimensions of recyclerView and any child views are known.
+                            //Remove listener after changed RecyclerView's height to prevent infinite loop
+                            Log.d("asidjoiad", "asoidjasod");
+                            mMainViewModel.setShowDialog(false);
+                            mRecyclerView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                        }
+                    });
             swipeRefresh.setRefreshing(false);
         }
     }
