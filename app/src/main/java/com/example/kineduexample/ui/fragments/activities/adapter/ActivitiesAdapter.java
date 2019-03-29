@@ -1,6 +1,7 @@
 package com.example.kineduexample.ui.fragments.activities.adapter;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -92,6 +93,7 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesAdapter.Ac
         }
 
         public void milestonesNumber(int value){
+            clearAll();
             switch (value){
                 case 5:
                     check1.setVisibility(View.VISIBLE);
@@ -104,6 +106,14 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesAdapter.Ac
                 case 1:
                     check5.setVisibility(View.VISIBLE);
             }
+        }
+
+        private void clearAll(){
+            check1.setVisibility(View.GONE);
+            check2.setVisibility(View.GONE);
+            check3.setVisibility(View.GONE);
+            check4.setVisibility(View.GONE);
+            check5.setVisibility(View.GONE);
         }
     }
 
