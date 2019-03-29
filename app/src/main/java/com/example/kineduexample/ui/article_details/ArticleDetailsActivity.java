@@ -7,21 +7,17 @@ import butterknife.OnClick;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.example.kineduexample.R;
 import com.example.kineduexample.data.network.KineduInteractor;
 import com.example.kineduexample.data.network.KineduInteractorImpl;
 import com.example.kineduexample.data.network.model.ArticleDetail;
 import com.example.kineduexample.ui.base.BaseActivity;
-
 import java.util.List;
 
 public class ArticleDetailsActivity extends BaseActivity implements ArticleDetailsView{

@@ -3,7 +3,6 @@ package com.example.kineduexample.data.network;
 import com.example.kineduexample.data.network.model.ActivitiesIndex;
 import com.example.kineduexample.data.network.model.ArticlesIndex;
 import com.example.kineduexample.data.network.model.ArticleDetailsIndex;
-
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;

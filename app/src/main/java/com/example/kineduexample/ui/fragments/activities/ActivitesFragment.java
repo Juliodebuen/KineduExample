@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModelProviders;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -15,20 +14,16 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-
 import com.example.kineduexample.R;
 import com.example.kineduexample.data.network.KineduInteractor;
 import com.example.kineduexample.data.network.KineduInteractorImpl;
 import com.example.kineduexample.data.network.model.Activities;
 import com.example.kineduexample.ui.fragments.activities.adapter.ActivitiesAdapter;
 import com.example.kineduexample.ui.fragments.MainViewModel;
-
 import java.util.List;
 
 public class ActivitesFragment extends Fragment implements ActivitiesView{

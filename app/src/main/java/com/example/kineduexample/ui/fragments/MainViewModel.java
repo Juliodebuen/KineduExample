@@ -1,11 +1,7 @@
 package com.example.kineduexample.ui.fragments;
 
-import android.content.Intent;
-
 import com.example.kineduexample.data.network.model.Activities;
-
 import java.util.List;
-
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 

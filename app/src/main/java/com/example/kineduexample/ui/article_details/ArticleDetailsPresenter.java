@@ -1,16 +1,13 @@
 package com.example.kineduexample.ui.article_details;
 
 import android.graphics.Bitmap;
-
 import com.example.kineduexample.data.network.KineduInteractor;
 import com.example.kineduexample.data.network.model.ArticleDetail;
 import com.example.kineduexample.data.network.model.ArticleDetailsIndex;
 import com.example.kineduexample.ui.utils.DownloadImageFromInternet;
 import com.example.kineduexample.ui.utils.OnBitmapCreatedListener;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
