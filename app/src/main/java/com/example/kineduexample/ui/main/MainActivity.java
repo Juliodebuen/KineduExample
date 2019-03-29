@@ -44,6 +44,7 @@ public class MainActivity extends BaseActivity implements MainView {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             ((TextView) parent.getChildAt(0)).setTextColor(Color.WHITE);
+            mMainViewModel.setAgeFilter(presenter.getSelectedSpinnerValue(ageSpinner.getSelectedItem().toString()));
         }
 
         @Override
@@ -63,11 +64,6 @@ public class MainActivity extends BaseActivity implements MainView {
         interactor = new KineduInteractorImpl();
         presenter = new MainPresenter(interactor);
         presenter.bind(this);
-
-        //presenter.searchActivities();
-
-        //presenter.searchArticleDetails(3004);
-
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), this);
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);

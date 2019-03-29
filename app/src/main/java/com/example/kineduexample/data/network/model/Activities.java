@@ -10,7 +10,7 @@ public class Activities {
     private String name;
 
     @SerializedName("age")
-    private String age;
+    private Integer age;
 
     @SerializedName("age_group")
     private String ageGroup;
@@ -55,11 +55,11 @@ public class Activities {
         this.name = name;
     }
 
-    public String getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(String age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 

@@ -1,5 +1,6 @@
 package com.example.kineduexample.ui.fragments.activities;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.graphics.Bitmap;
@@ -36,6 +37,7 @@ public class ActivitesFragment extends Fragment implements ActivitiesView{
     private MainViewModel mMainViewModel;
     private List<Activities> activitiesList;
     private Unbinder unbinder;
+    private ActivitiesAdapter adapter;
 
     @BindView(R.id.activitiesRecyclerView)
     RecyclerView mRecyclerView;
@@ -48,7 +50,7 @@ public class ActivitesFragment extends Fragment implements ActivitiesView{
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+    public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.activites_fragment, container, false);
         unbinder = ButterKnife.bind(this, rootView);
@@ -68,6 +70,19 @@ public class ActivitesFragment extends Fragment implements ActivitiesView{
             }
         });
 
+        mMainViewModel.getAgeFilter().observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                if(adapter != null) {
+                  //  if (integer > -1) {
+                        adapter.getFilter().filter(String.valueOf(integer));
+                  //  } else {
+                   //     adapter.getFilter().filter("");
+                  //  }
+                }
+            }
+        });
+
         return rootView;
     }
 
@@ -81,7 +96,7 @@ public class ActivitesFragment extends Fragment implements ActivitiesView{
     @Override
     public void onLoadBitmaps(List<Bitmap> bitmaps) {
         if(activitiesList != null && activitiesList.size() > 0){
-            ActivitiesAdapter adapter = new ActivitiesAdapter(getContext(), activitiesList, bitmaps);
+            adapter = new ActivitiesAdapter(getContext(), activitiesList, bitmaps);
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
             linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
             mRecyclerView.setAdapter(adapter);
@@ -90,10 +105,6 @@ public class ActivitesFragment extends Fragment implements ActivitiesView{
                     .addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                         @Override
                         public void onGlobalLayout() {
-                            //At this point the layout is complete and the
-                            //dimensions of recyclerView and any child views are known.
-                            //Remove listener after changed RecyclerView's height to prevent infinite loop
-                            Log.d("asidjoiad", "asoidjasod");
                             mMainViewModel.setShowDialog(false);
                             mRecyclerView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                         }

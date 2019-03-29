@@ -19,6 +19,12 @@ public class MainPresenter {
     }
 
 
-
-
+    public Integer getSelectedSpinnerValue(String value) {
+        try{
+            return Integer.valueOf(value.replace("MONTH", "").replace("S", "").replace("ALL","").trim());
+        }catch (Exception e){
+            e.printStackTrace();
+            return -1;
+        }
+    }
 }
