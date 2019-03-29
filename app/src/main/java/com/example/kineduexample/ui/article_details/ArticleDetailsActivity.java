@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -45,6 +46,8 @@ public class ArticleDetailsActivity extends BaseActivity implements ArticleDetai
         setContentView(R.layout.activity_article_details);
         ButterKnife.bind(this);
         setProgressDialog(getString(R.string.loading));
+        assert getSupportActionBar() != null;
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         interactor = new KineduInteractorImpl();
@@ -68,6 +71,12 @@ public class ArticleDetailsActivity extends BaseActivity implements ArticleDetai
                 startActivity(sendIntent);
             }
         });
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 
     @Override
