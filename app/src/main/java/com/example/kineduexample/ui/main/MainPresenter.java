@@ -21,6 +21,9 @@ public class MainPresenter {
 
     public Integer getSelectedSpinnerValue(String value) {
         try{
+            if(value.contains("0-1 MONTH")){
+                return 1;
+            }
             return Integer.valueOf(value.replace("MONTH", "").replace("S", "").replace("ALL","").trim());
         }catch (Exception e){
             e.printStackTrace();
