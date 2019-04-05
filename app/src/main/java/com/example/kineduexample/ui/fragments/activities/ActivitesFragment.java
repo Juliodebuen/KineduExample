@@ -2,8 +2,6 @@ package com.example.kineduexample.ui.fragments.activities;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,7 +28,6 @@ public class ActivitesFragment extends Fragment implements ActivitiesView{
     private KineduInteractor interactor;
     private ActivitiesPresenter presenter;
     private MainViewModel mMainViewModel;
-    private List<Activities> activitiesList;
     private Unbinder unbinder;
     private ActivitiesAdapter adapter;
 
@@ -86,9 +83,9 @@ public class ActivitesFragment extends Fragment implements ActivitiesView{
     }
 
     @Override
-    public void onLoadBitmaps(List<Bitmap> bitmaps) {
-        if(activitiesList != null && activitiesList.size() > 0){
-            adapter = new ActivitiesAdapter(activitiesList, bitmaps);
+    public void onLoadActivities(List<Activities> activities) {
+        if(activities != null && activities.size() > 0){
+            adapter = new ActivitiesAdapter(getContext(), activities);
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
             linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
             mRecyclerView.setAdapter(adapter);
@@ -103,11 +100,5 @@ public class ActivitesFragment extends Fragment implements ActivitiesView{
                     });
             swipeRefresh.setRefreshing(false);
         }
-    }
-
-    @Override
-    public void onLoadActivities(List<Activities> activities) {
-        presenter.getImagesForActivities(activities);
-        this.activitiesList = activities;
     }
 }

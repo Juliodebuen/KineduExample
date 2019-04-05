@@ -1,6 +1,6 @@
 package com.example.kineduexample.ui.fragments.articles.adapter;
 
-import android.graphics.Bitmap;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.kineduexample.R;
 import com.example.kineduexample.data.network.model.Articles;
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.List;
 import androidx.annotation.NonNull;
@@ -22,18 +24,14 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.Articl
     private List<Articles> articlesList;
     private List<Articles> filteredData;
     private List<Articles> nList;
-    private List<Bitmap> bitmaps;
-    private List<Bitmap> filteredBitmaps;
-    private List<Bitmap> nListBitmap;
     private ItemFilter mFilter = new ItemFilter();
-
+    private Context context;
     private OnArticleClickListener mListener;
 
-    public ArticlesAdapter(List<Articles> articlesList, List<Bitmap> bitmaps){
+    public ArticlesAdapter(Context context, List<Articles> articlesList){
         this.articlesList = articlesList;
         this.filteredData = articlesList;
-        this.bitmaps = bitmaps;
-        this.filteredBitmaps = bitmaps;
+        this.context = context;
     }
 
     public void setArticleListener(OnArticleClickListener mListener){
@@ -57,7 +55,7 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.Articl
         final Articles item = getItem(position);
         holder.name.setText(item.getName());
         holder.shorDescription.setText(item.getShortDescription());
-        holder.picture.setImageBitmap(filteredBitmaps.get(position));
+        Picasso.with(context).load(item.getPicture()).into(holder.picture);
 
         holder.articleCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,23 +107,18 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.Articl
             int count = items.size();
 
             nList = new ArrayList<>(count);
-            nListBitmap = new ArrayList<>(count);
             if(!filterString.equals("-1")){
                 for(int i = 0; i < count; i++){
                     if(items.get(i).getMinAge() <= Integer.valueOf(filterString) && items.get(i).getMaxAge() >= Integer.valueOf(filterString)){
                         nList.add(items.get(i));
-                        nListBitmap.add(bitmaps.get(i));
                     }
                 }
             }else{
                 nList = articlesList;
-                nListBitmap = bitmaps;
             }
 
             results.values = nList;
             results.count = nList.size();
-
-            filteredBitmaps = nListBitmap;
 
             return results;
         }

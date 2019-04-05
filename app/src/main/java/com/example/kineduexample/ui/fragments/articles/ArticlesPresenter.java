@@ -1,20 +1,12 @@
 package com.example.kineduexample.ui.fragments.articles;
 
-import android.graphics.Bitmap;
-
 import com.example.kineduexample.data.network.KineduInteractor;
-import com.example.kineduexample.data.network.model.Articles;
 import com.example.kineduexample.data.network.model.ArticlesIndex;
-import com.example.kineduexample.ui.utils.DownloadImageFromInternet;
-import com.example.kineduexample.ui.utils.OnBitmapCreatedListener;
-
-import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ArticlesPresenter implements OnBitmapCreatedListener {
+public class ArticlesPresenter {
     private KineduInteractor interactor;
     private ArticlesView view;
 
@@ -46,13 +38,4 @@ public class ArticlesPresenter implements OnBitmapCreatedListener {
                 });
     }
 
-    public void getImagesForArticles(List<Articles> articlesList){
-        new DownloadImageFromInternet(this, articlesList).execute();
-    }
-
-    @Override
-    public void onBitmapCreated(List<Bitmap> bitmap) {
-        if(view != null)
-            view.onLoadBitmaps(bitmap);
-    }
 }

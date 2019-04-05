@@ -1,7 +1,6 @@
 package com.example.kineduexample.ui.fragments.activities.adapter;
 
-import android.graphics.Bitmap;
-import android.util.Log;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.kineduexample.R;
 import com.example.kineduexample.data.network.model.Activities;
+import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 import androidx.annotation.NonNull;
@@ -22,17 +22,14 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesAdapter.Ac
     private List<Activities> activitiesList;
     private List<Activities> filteredData;
     private List<Activities> nList;
-    private List<Bitmap> bitmaps;
-    private List<Bitmap> filteredBitmaps;
-    private List<Bitmap> nListBitmap;
     private ItemFilter mFilter = new ItemFilter();
+    private Context context;
 
 
-    public ActivitiesAdapter(List<Activities> activitiesList, List<Bitmap> bitmaps){
+    public ActivitiesAdapter(Context context, List<Activities> activitiesList){
         this.activitiesList = activitiesList;
         this.filteredData = activitiesList;
-        this.bitmaps = bitmaps;
-        this.filteredBitmaps = bitmaps;
+        this.context = context;
     }
 
     @NonNull
@@ -52,7 +49,7 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesAdapter.Ac
         Activities item = getItem(position);
         holder.name.setText(item.getName());
         holder.purpose.setText(item.getPurpose());
-        holder.thumbnail.setImageBitmap(filteredBitmaps.get(position));
+        Picasso.with(context).load(item.getThumbnail()).into(holder.thumbnail);
         holder.milestonesNumber(item.getActiveMilestones());
     }
 
@@ -135,23 +132,18 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesAdapter.Ac
             int count = items.size();
 
             nList = new ArrayList<>(count);
-            nListBitmap = new ArrayList<>(count);
             if(!filterString.equals("-1")) {
                 for (int i = 0; i < count; i++) {
                     if (items.get(i).getAge() == Integer.valueOf(filterString)) {
                         nList.add(items.get(i));
-                        nListBitmap.add(bitmaps.get(i));
                     }
                 }
             }else{
                 nList = activitiesList;
-                nListBitmap = bitmaps;
             }
 
             results.values = nList;
             results.count = nList.size();
-
-            filteredBitmaps = nListBitmap;
 
             return results;
         }

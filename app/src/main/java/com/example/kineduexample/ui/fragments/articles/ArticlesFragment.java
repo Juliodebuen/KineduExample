@@ -36,7 +36,6 @@ import java.util.List;
 public class ArticlesFragment extends Fragment implements ArticlesView, OnArticleClickListener {
     private KineduInteractor interactor;
     private ArticlesPresenter presenter;
-    private List<Articles> articlesList;
     private MainViewModel mMainViewModel;
     private Unbinder unbinder;
     private ArticlesAdapter adapter;
@@ -95,24 +94,17 @@ public class ArticlesFragment extends Fragment implements ArticlesView, OnArticl
     }
 
     @Override
-    public void onLoadBitmaps(List<Bitmap> bitmaps) {
-        if(articlesList != null && articlesList.size() > 0){
-            adapter = new ArticlesAdapter(articlesList, bitmaps);
+    public void onLoadArticles(List<Articles> articles) {
+        if(articles != null && articles.size() > 0){
+            adapter = new ArticlesAdapter(getContext(), articles);
             adapter.setArticleListener(this);
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
             linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
             mRecyclerView.setAdapter(adapter);
             mRecyclerView.setLayoutManager(linearLayoutManager);
-           // mMainViewModel.setShowDialog(false);
+            // mMainViewModel.setShowDialog(false);
             swipeRefresh.setRefreshing(false);
         }
-
-    }
-
-    @Override
-    public void onLoadArticles(List<Articles> articles) {
-        presenter.getImagesForArticles(articles);
-        this.articlesList = articles;
     }
 
     @Override

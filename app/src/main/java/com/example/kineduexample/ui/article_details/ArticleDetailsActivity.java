@@ -1,16 +1,12 @@
 package com.example.kineduexample.ui.article_details;
 
-import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -90,7 +86,6 @@ public class ArticleDetailsActivity extends BaseActivity implements ArticleDetai
     public void onLoadBitmaps(List<Bitmap> bitmap) {
         body.setText(Html.fromHtml(articleDetail.getBody(), Html.FROM_HTML_MODE_LEGACY));
         body.setMovementMethod(LinkMovementMethod.getInstance());
-
         title.setText(articleDetail.getTitle());
         picture.setImageBitmap(bitmap.get(0));
         hideProgressDialog();
