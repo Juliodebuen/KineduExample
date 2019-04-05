@@ -1,5 +1,6 @@
 package com.example.kineduexample.ui.article_details;
 
+import androidx.core.view.ViewCompat;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import android.content.Intent;
@@ -15,9 +16,13 @@ import com.example.kineduexample.data.network.KineduInteractor;
 import com.example.kineduexample.data.network.KineduInteractorImpl;
 import com.example.kineduexample.data.network.model.ArticleDetail;
 import com.example.kineduexample.ui.base.BaseActivity;
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 public class ArticleDetailsActivity extends BaseActivity implements ArticleDetailsView{
+    public static final String VIEW_NAME_HEADER_DESCRIPTION = "detail:header:description";
+    public static final String VIEW_NAME_HEADER_IMAGE = "detail:header:image";
     private KineduInteractor interactor;
     private ArticleDetailsPresenter presenter;
 
@@ -54,7 +59,6 @@ public class ArticleDetailsActivity extends BaseActivity implements ArticleDetai
         if(extras != null){
             articleId = extras.getInt("articleId");
             presenter.searchArticleDetails(articleId);
-            showProgressDialog();
         }
 
         shareImg.setOnClickListener(new View.OnClickListener() {
@@ -67,6 +71,9 @@ public class ArticleDetailsActivity extends BaseActivity implements ArticleDetai
                 startActivity(sendIntent);
             }
         });
+
+        ViewCompat.setTransitionName(picture, VIEW_NAME_HEADER_IMAGE);
+        ViewCompat.setTransitionName(title, VIEW_NAME_HEADER_DESCRIPTION);
     }
 
     @Override
@@ -77,17 +84,14 @@ public class ArticleDetailsActivity extends BaseActivity implements ArticleDetai
 
     @Override
     public void onLoadArticleDetails(ArticleDetail articleDetail) {
-        presenter.getImagesForArticleDetails(articleDetail);
         this.articleDetail = articleDetail;
 
-    }
-
-    @Override
-    public void onLoadBitmaps(List<Bitmap> bitmap) {
         body.setText(Html.fromHtml(articleDetail.getBody(), Html.FROM_HTML_MODE_LEGACY));
         body.setMovementMethod(LinkMovementMethod.getInstance());
         title.setText(articleDetail.getTitle());
-        picture.setImageBitmap(bitmap.get(0));
-        hideProgressDialog();
+        Picasso.with(getApplicationContext()).load(articleDetail.getPicture())
+                .noFade()
+                .into(picture);
     }
+
 }

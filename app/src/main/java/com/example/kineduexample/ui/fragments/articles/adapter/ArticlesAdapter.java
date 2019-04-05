@@ -1,5 +1,6 @@
 package com.example.kineduexample.ui.fragments.articles.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,7 +53,7 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.Articl
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ArticlesViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ArticlesViewHolder holder, final int position) {
         final Articles item = getItem(position);
         holder.name.setText(item.getName());
         holder.shorDescription.setText(item.getShortDescription());
@@ -60,9 +62,10 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.Articl
         holder.articleCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.onArticleClick(item.getId());
+                mListener.onArticleClick(item.getId(), holder.picture, holder.shorDescription);
             }
         });
+
     }
 
     @Override

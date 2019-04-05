@@ -6,5 +6,4 @@ import java.util.List;
 
 public interface ArticleDetailsView {
     void onLoadArticleDetails(ArticleDetail articleDetail);
-    void onLoadBitmaps(List<Bitmap> bitmap);
 }

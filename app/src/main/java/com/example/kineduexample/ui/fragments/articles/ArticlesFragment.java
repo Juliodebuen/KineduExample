@@ -2,9 +2,11 @@ package com.example.kineduexample.ui.fragments.articles;
 
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.util.Pair;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -18,6 +20,8 @@ import butterknife.Unbinder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.kineduexample.R;
 import com.example.kineduexample.data.network.KineduInteractor;
@@ -108,9 +112,17 @@ public class ArticlesFragment extends Fragment implements ArticlesView, OnArticl
     }
 
     @Override
-    public void onArticleClick(int articleId) {
+    public void onArticleClick(int articleId, ImageView picture, TextView shorDescription) {
+        ActivityOptionsCompat activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                getActivity(),
+                new Pair<View, String>(picture,
+                        ArticleDetailsActivity.VIEW_NAME_HEADER_IMAGE),
+                new Pair<View, String>(shorDescription,
+                        ArticleDetailsActivity.VIEW_NAME_HEADER_DESCRIPTION));
+
+
         Intent intent = new Intent(getContext(), ArticleDetailsActivity.class);
         intent.putExtra("articleId", articleId);
-        startActivity(intent);
+        ActivityCompat.startActivity(getContext(), intent, activityOptions.toBundle());
     }
 }
