@@ -21,7 +21,7 @@ object DataBindingAdapters {
     @BindingAdapter("imageResource")
     fun setImageDrawable(view: ImageView, picture: String) {
         //view.setImageDrawable(drawable)
-        Picasso.with(applicationContext).load(picture)
+        Picasso.with(view.context).load(picture)
                 .noFade()
                 .into(view)
     }
