@@ -1,90 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.fragments.activities.ActivitesFragment">
-    <LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="myAdapter"
+            type="com.example.kineduexample.ui.fragments.activities.adapter.ActivitiesAdapter"/>
+        <variable
+            name="myLayoutManager"
+            type="androidx.recyclerview.widget.LinearLayoutManager"/>
+    </data>
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-        <androidx.cardview.widget.CardView
+        tools:context=".ui.fragments.activities.ActivitesFragment">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/padding"
-            android:elevation="4dp"
-            >
-            <LinearLayout
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@color/skyblue"
-                android:gravity="center">
+                android:layout_margin="@dimen/padding"
+                android:elevation="4dp"
+                >
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:layout_marginTop="@dimen/padding"
-                    android:layout_marginLeft="@dimen/double_padding"
-                    android:layout_marginRight="0dp"
-                    android:layout_marginBottom="@dimen/padding">
-                    <ImageView
-                        android:layout_width="@dimen/img_crawling"
-                        android:layout_height="@dimen/img_crawling"
-                        android:src="@drawable/baby_crawling"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="7"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/subtitle"
-                        android:layout_marginBottom="@dimen/padding"
-                        android:layout_marginTop="@dimen/padding"
-                        android:textStyle="bold"
-                        android:text="@string/how_is_fwefew"/>
+                    android:orientation="horizontal"
+                    android:background="@color/skyblue"
+                    android:gravity="center">
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_gravity="right"
-                        android:gravity="right"
-                        android:paddingTop="@dimen/double_padding"
-                        android:paddingBottom="@dimen/padding">
+                        android:layout_weight="2"
+                        android:layout_marginTop="@dimen/padding"
+                        android:layout_marginLeft="@dimen/double_padding"
+                        android:layout_marginRight="0dp"
+                        android:layout_marginBottom="@dimen/padding">
+                        <ImageView
+                            android:layout_width="@dimen/img_crawling"
+                            android:layout_height="@dimen/img_crawling"
+                            android:src="@drawable/baby_crawling"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="7"
+                        android:orientation="vertical">
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/normal"
-                            android:text="@string/learn_more"
-                            android:layout_gravity="center"
-                            android:layout_marginRight="@dimen/padding"
-                            />
-                        <ImageView
-                            android:layout_width="@dimen/arrowSize"
-                            android:layout_height="@dimen/arrowSize"
-                            android:scaleType="centerInside"
-                            android:layout_marginRight="@dimen/padding"
-                            android:src="@drawable/ic_arrow_right"/>
+                            android:textSize="@dimen/subtitle"
+                            android:layout_marginBottom="@dimen/padding"
+                            android:layout_marginTop="@dimen/padding"
+                            android:textStyle="bold"
+                            android:text="@string/how_is_fwefew"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_gravity="right"
+                            android:gravity="right"
+                            android:paddingTop="@dimen/double_padding"
+                            android:paddingBottom="@dimen/padding">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/normal"
+                                android:text="@string/learn_more"
+                                android:layout_gravity="center"
+                                android:layout_marginRight="@dimen/padding"
+                                />
+                            <ImageView
+                                android:layout_width="@dimen/arrowSize"
+                                android:layout_height="@dimen/arrowSize"
+                                android:scaleType="centerInside"
+                                android:layout_marginRight="@dimen/padding"
+                                android:src="@drawable/ic_arrow_right"/>
+                        </LinearLayout>
+
                     </LinearLayout>
-
                 </LinearLayout>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipeRefresh"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/activitiesRecyclerView"
+            </androidx.cardview.widget.CardView>
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipeRefresh"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:listitem="@layout/activities_item"/>
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+                android:layout_height="wrap_content">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/activitiesRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    adapter="@{myAdapter}"
+                    layoutManager="@{myLayoutManager}"
+                    tools:listitem="@layout/activities_item"/>
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    </LinearLayout>
-</FrameLayout>
+        </LinearLayout>
+    </FrameLayout>
+</layout>

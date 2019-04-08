@@ -16,10 +16,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import com.example.kineduexample.R
 import com.example.kineduexample.data.network.KineduInteractor
 import com.example.kineduexample.data.network.KineduInteractorImpl
 import com.example.kineduexample.data.network.model.Articles
+import com.example.kineduexample.databinding.FragmentArticlesBinding
 import com.example.kineduexample.ui.article_details.ArticleDetailsActivity
 import com.example.kineduexample.ui.fragments.articles.adapter.ArticlesAdapter
 import com.example.kineduexample.ui.fragments.MainViewModel
@@ -34,10 +36,13 @@ class ArticlesFragment : Fragment(), ArticlesView, OnArticleClickListener {
     private var presenter: ArticlesPresenter? = null
     private var mMainViewModel: MainViewModel? = null
     private var adapter: ArticlesAdapter? = null
+    private lateinit var binding : FragmentArticlesBinding;
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_articles, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_articles, container, false)
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,7 +55,7 @@ class ArticlesFragment : Fragment(), ArticlesView, OnArticleClickListener {
         presenter!!.searchArticles()
         mMainViewModel!!.setShowDialog(true)
 
-        swipeRefresh!!.setOnRefreshListener {
+        binding.swipeRefresh.setOnRefreshListener {
             presenter!!.searchArticles()
             mMainViewModel!!.setResetSpinner(true)
         }
@@ -68,15 +73,19 @@ class ArticlesFragment : Fragment(), ArticlesView, OnArticleClickListener {
     }
 
     override fun onLoadArticles(articles: List<Articles>) {
-        if (articles != null && articles.size > 0) {
+        if (articles.isNotEmpty()) {
             adapter = ArticlesAdapter(context!!, articles as MutableList<Articles>)
             adapter!!.setArticleListener(this)
             val linearLayoutManager = LinearLayoutManager(context)
             linearLayoutManager.orientation = RecyclerView.VERTICAL
-            articlesRecyclerView!!.adapter = adapter
-            articlesRecyclerView!!.layoutManager = linearLayoutManager
+
+            binding.myAdapter = adapter
+            binding.myLayoutManager = linearLayoutManager
+
+        //    articlesRecyclerView!!.adapter =
+         //   articlesRecyclerView!!.layoutManager = linearLayoutManager
             // mMainViewModel.setShowDialog(false);
-            swipeRefresh!!.isRefreshing = false
+            binding.swipeRefresh.isRefreshing = false
         }
     }
 
@@ -95,7 +104,6 @@ class ArticlesFragment : Fragment(), ArticlesView, OnArticleClickListener {
     }
 
     companion object {
-
         fun newInstance(): ArticlesFragment {
             return ArticlesFragment()
         }

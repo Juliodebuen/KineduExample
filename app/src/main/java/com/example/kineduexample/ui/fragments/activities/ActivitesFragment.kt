@@ -10,10 +10,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
+import androidx.databinding.DataBindingUtil
 import com.example.kineduexample.R
 import com.example.kineduexample.data.network.KineduInteractor
 import com.example.kineduexample.data.network.KineduInteractorImpl
 import com.example.kineduexample.data.network.model.Activities
+import com.example.kineduexample.databinding.ActivitesFragmentBinding
 import com.example.kineduexample.ui.fragments.activities.adapter.ActivitiesAdapter
 import com.example.kineduexample.ui.fragments.MainViewModel
 import kotlinx.android.synthetic.main.activites_fragment.*
@@ -24,10 +26,13 @@ class ActivitesFragment : Fragment(), ActivitiesView {
     private var presenter: ActivitiesPresenter? = null
     private var mMainViewModel: MainViewModel? = null
     private var adapter: ActivitiesAdapter? = null
+    private lateinit var binding: ActivitesFragmentBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.activites_fragment, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.activites_fragment, container, false)
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,7 +45,7 @@ class ActivitesFragment : Fragment(), ActivitiesView {
         presenter!!.searchActivities()
         mMainViewModel!!.setShowDialog(true)
 
-        swipeRefresh!!.setOnRefreshListener {
+        binding.swipeRefresh.setOnRefreshListener {
             presenter!!.searchActivities()
             mMainViewModel!!.setResetSpinner(true)
         }
@@ -58,25 +63,34 @@ class ActivitesFragment : Fragment(), ActivitiesView {
     }
 
     override fun onLoadActivities(activities: List<Activities>) {
-        if (activities != null && activities.isNotEmpty()) {
+        if (activities.isNotEmpty()) {
             adapter = ActivitiesAdapter(context!!, activities as MutableList<Activities>)
             val linearLayoutManager = LinearLayoutManager(context)
             linearLayoutManager.orientation = RecyclerView.VERTICAL
-            activitiesRecyclerView!!.adapter = adapter
-            activitiesRecyclerView!!.layoutManager = linearLayoutManager
-            activitiesRecyclerView!!.viewTreeObserver
+
+          //  binding.hasFixedSize = true
+          //  binding.activitiesRecyclerView.layoutManager = linearLayoutManager
+            //binding.activitiesRecyclerView.adapter = adapter
+            binding.myAdapter = adapter
+            binding.myLayoutManager = linearLayoutManager
+
+
+          //  val linearLayoutManager = LinearLayoutManager(context)
+          //  linearLayoutManager.orientation = RecyclerView.VERTICAL
+         //   activitiesRecyclerView!!.adapter = adapter
+          //  activitiesRecyclerView!!.layoutManager = linearLayoutManager
+            binding.activitiesRecyclerView.viewTreeObserver
                     .addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
                         override fun onGlobalLayout() {
                             mMainViewModel!!.setShowDialog(false)
-                            activitiesRecyclerView!!.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                            binding.activitiesRecyclerView.viewTreeObserver.removeOnGlobalLayoutListener(this)
                         }
                     })
-            swipeRefresh!!.isRefreshing = false
+            binding.swipeRefresh.isRefreshing = false
         }
     }
 
     companion object {
-
         fun newInstance(): ActivitesFragment {
             return ActivitesFragment()
         }
