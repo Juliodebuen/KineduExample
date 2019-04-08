@@ -16,13 +16,11 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.example.kineduexample.R;
 import com.example.kineduexample.data.network.KineduInteractor;
 import com.example.kineduexample.data.network.KineduInteractorImpl;

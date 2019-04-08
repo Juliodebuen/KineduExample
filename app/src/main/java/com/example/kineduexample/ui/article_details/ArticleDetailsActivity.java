@@ -1,10 +1,10 @@
 package com.example.kineduexample.ui.article_details;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
@@ -17,8 +17,6 @@ import com.example.kineduexample.data.network.KineduInteractorImpl;
 import com.example.kineduexample.data.network.model.ArticleDetail;
 import com.example.kineduexample.ui.base.BaseActivity;
 import com.squareup.picasso.Picasso;
-
-import java.util.List;
 
 public class ArticleDetailsActivity extends BaseActivity implements ArticleDetailsView{
     public static final String VIEW_NAME_HEADER_DESCRIPTION = "detail:header:description";
@@ -35,8 +33,11 @@ public class ArticleDetailsActivity extends BaseActivity implements ArticleDetai
     @BindView(R.id.title)
     TextView title;
 
-     @BindView(R.id.shareImg)
-     ImageView shareImg;
+    @BindView(R.id.shareImg)
+    ImageView shareImg;
+
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     private int articleId;
     private ArticleDetail articleDetail;
@@ -47,7 +48,10 @@ public class ArticleDetailsActivity extends BaseActivity implements ArticleDetai
         setContentView(R.layout.activity_article_details);
         ButterKnife.bind(this);
         setProgressDialog(getString(R.string.loading));
-        assert getSupportActionBar() != null;
+    //    assert getSupportActionBar() != null;
+      //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
@@ -68,7 +72,7 @@ public class ArticleDetailsActivity extends BaseActivity implements ArticleDetai
                 sendIntent.setAction(Intent.ACTION_SEND);
                 sendIntent.putExtra(Intent.EXTRA_TEXT, articleDetail.getLink());
                 sendIntent.setType("text/plain");
-                startActivity(sendIntent);
+                startActivity(Intent.createChooser(sendIntent, getResources().getString(R.string.share)));
             }
         });
 
@@ -78,7 +82,7 @@ public class ArticleDetailsActivity extends BaseActivity implements ArticleDetai
 
     @Override
     public boolean onSupportNavigateUp() {
-        finish();
+        onBackPressed();
         return true;
     }
 

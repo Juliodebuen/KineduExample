@@ -8,6 +8,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="loading">Cargando...</string>
+    <string name="share">Compartir</string>
     <string-array name="ages">
         <item>ALL MONTHS</item>
         <item>0-1 MONTH</item>

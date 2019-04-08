@@ -1,5 +1,6 @@
 package com.example.kineduexample.ui.main;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
@@ -12,19 +13,23 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
 import com.example.kineduexample.R;
 import com.example.kineduexample.data.network.KineduInteractor;
 import com.example.kineduexample.data.network.KineduInteractorImpl;
 import com.example.kineduexample.data.network.model.DataActivities;
 import com.example.kineduexample.ui.base.BaseActivity;
 import com.example.kineduexample.ui.fragments.MainViewModel;
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
 
-public class MainActivity extends BaseActivity implements MainView {
+public class MainActivity extends BaseActivity implements MainView/*, AppBarLayout.OnOffsetChangedListener */{
     private KineduInteractor interactor;
     private MainPresenter presenter;
     private ViewPagerAdapter viewPagerAdapter;
     private MainViewModel mMainViewModel;
+    private int mMaxScrollSize;
+
 
     @BindView(R.id.viewpager)
     ViewPager viewPager;
@@ -34,6 +39,12 @@ public class MainActivity extends BaseActivity implements MainView {
 
     @BindView(R.id.ageSpinner)
     Spinner ageSpinner;
+
+    @BindView(R.id.appbar)
+    AppBarLayout appBarLayout;
+
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     private AdapterView.OnItemSelectedListener listener = new AdapterView.OnItemSelectedListener() {
         @Override
@@ -59,6 +70,19 @@ public class MainActivity extends BaseActivity implements MainView {
         interactor = new KineduInteractorImpl();
         presenter = new MainPresenter(interactor);
         presenter.bind(this);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+     //   appBarLayout.addOnOffsetChangedListener(this);
+       // mMaxScrollSize = appBarLayout.getTotalScrollRange();
+
+
+
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), this);
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
@@ -99,4 +123,29 @@ public class MainActivity extends BaseActivity implements MainView {
         presenter.unbind();
         super.onDestroy();
     }
+/*
+    @Override
+    public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
+        if (mMaxScrollSize == 0)
+            mMaxScrollSize = appBarLayout.getTotalScrollRange();
+
+        int percentage = (Math.abs(i)) * 100 / mMaxScrollSize;
+
+        if (percentage >= PERCENTAGE_TO_ANIMATE_AVATAR && mIsAvatarShown) {
+            mIsAvatarShown = false;
+
+            mProfileImage.animate()
+                    .scaleY(0).scaleX(0)
+                    .setDuration(200)
+                    .start();
+        }
+
+        if (percentage <= PERCENTAGE_TO_ANIMATE_AVATAR && !mIsAvatarShown) {
+            mIsAvatarShown = true;
+
+            mProfileImage.animate()
+                    .scaleY(1).scaleX(1)
+                    .start();
+        }
+    }*/
 }
