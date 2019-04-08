@@ -14,11 +14,16 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kineduexample.ui.fragments.articles.adapter.ArticlesAdapter
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_article_details.*
 
 object DataBindingAdapters {
     @BindingAdapter("imageResource")
-    fun setImageDrawable(view: ImageView, drawable: Drawable) {
-        view.setImageDrawable(drawable)
+    fun setImageDrawable(view: ImageView, picture: String) {
+        //view.setImageDrawable(drawable)
+        Picasso.with(applicationContext).load(picture)
+                .noFade()
+                .into(view)
     }
 
     @BindingAdapter("adapter")

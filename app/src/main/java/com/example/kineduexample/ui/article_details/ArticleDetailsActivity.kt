@@ -60,9 +60,9 @@ class ArticleDetailsActivity : BaseActivity(), ArticleDetailsView {
         body!!.text = Html.fromHtml(articleDetail.body, Html.FROM_HTML_MODE_LEGACY)
         body!!.movementMethod = LinkMovementMethod.getInstance()
         tTitle!!.text = articleDetail.title
-        Picasso.with(applicationContext).load(articleDetail.picture)
+       /* Picasso.with(applicationContext).load(articleDetail.picture)
                 .noFade()
-                .into(picture)
+                .into(picture)*/
     }
 
     companion object {
