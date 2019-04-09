@@ -39,9 +39,6 @@ class ActivitiesAdapter(private val context: Context, private val activitiesList
 
     override fun onBindViewHolder(holder: ActivitiesViewHolder, position: Int) {
         val item = getItem(position)
-       /* holder.name!!.text = item.name
-        holder.purpose!!.text = item.purpose
-        Picasso.with(context).load(item.thumbnail).into(holder.thumbnail)*/
         holder.itemBinding.activities = item
         holder.bind(item)
         holder.milestonesNumber(item.activeMilestones!!)
@@ -53,9 +50,6 @@ class ActivitiesAdapter(private val context: Context, private val activitiesList
 
 
     inner class ActivitiesViewHolder(itemView: ActivitiesItemBinding) : RecyclerView.ViewHolder(itemView.root) {
-        /*internal var thumbnail: ImageView? = itemView.thumbnail
-        internal var name: TextView? = itemView.name
-        internal var purpose: TextView? = itemView.purpose*/
         internal var check1: ImageView? = itemView.check1
         internal var check2: ImageView? = itemView.check2
         internal var check3: ImageView? = itemView.check3

@@ -3,8 +3,6 @@ package com.example.kineduexample.ui.article_details
 import androidx.core.view.ViewCompat
 import android.content.Intent
 import android.os.Bundle
-import android.text.Html
-import android.text.method.LinkMovementMethod
 import androidx.databinding.DataBindingUtil
 import com.example.kineduexample.R
 import com.example.kineduexample.data.network.KineduInteractor
@@ -12,7 +10,6 @@ import com.example.kineduexample.data.network.KineduInteractorImpl
 import com.example.kineduexample.data.network.model.ArticleDetail
 import com.example.kineduexample.databinding.ActivityArticleDetailsBinding
 import com.example.kineduexample.ui.base.BaseActivity
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_article_details.*
 
 class ArticleDetailsActivity : BaseActivity(), ArticleDetailsView {
@@ -26,6 +23,7 @@ class ArticleDetailsActivity : BaseActivity(), ArticleDetailsView {
         super.onCreate(savedInstanceState)
        // setContentView(R.layout.activity_article_details)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_article_details)
+      //  binding.articleDetail = ArticleDetail()
 
         setProgressDialog(getString(R.string.loading))
         setSupportActionBar(toolbar)
@@ -61,18 +59,7 @@ class ArticleDetailsActivity : BaseActivity(), ArticleDetailsView {
 
     override fun onLoadArticleDetails(articleDetail: ArticleDetail) {
         this.articleDetail = articleDetail
-
-        var articleObserver = ArticleObserver()
-        articleObserver.body = "texto"
-        articleObserver.tTitle = articleDetail.title!!
-        binding.articleObserver = articleObserver
-
-      //  body!!.text = Html.fromHtml(articleDetail.body, Html.FROM_HTML_MODE_LEGACY)
-       // body!!.movementMethod = LinkMovementMethod.getInstance()
-       // tTitle!!.text = articleDetail.title
-       /* Picasso.with(applicationContext).load(articleDetail.picture)
-                .noFade()
-                .into(picture)*/
+        binding.articleDetail = articleDetail
     }
 
     companion object {

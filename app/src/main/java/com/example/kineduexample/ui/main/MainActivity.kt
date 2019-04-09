@@ -47,12 +47,13 @@ class MainActivity : BaseActivity(), MainView {
         presenter = MainPresenter(interactor as KineduInteractorImpl)
         presenter!!.bind(this)
 
-        toolbar!!.setNavigationOnClickListener { onBackPressed() }
+        binding.toolbar.setNavigationOnClickListener { onBackPressed() }
 
         viewPagerAdapter = ViewPagerAdapter(supportFragmentManager, this)
-        viewpager!!.adapter = viewPagerAdapter
-        tabLayout!!.setupWithViewPager(viewpager)
-        ageSpinner!!.onItemSelectedListener = listener
+
+        binding.adapter = viewPagerAdapter
+        binding.setupViewPager = viewpager
+        binding.spinnerListener = listener
 
         mMainViewModel!!.showDialog.observe(this, Observer { aBoolean ->
             if (aBoolean!!) {

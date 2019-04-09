@@ -33,7 +33,6 @@ class ActivitesFragment : Fragment(), ActivitiesView {
         binding = DataBindingUtil.inflate(inflater, R.layout.activites_fragment, container, false)
 
         return binding.root
-        //return inflater.inflate(R.layout.activites_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -70,22 +69,14 @@ class ActivitesFragment : Fragment(), ActivitiesView {
             val linearLayoutManager = LinearLayoutManager(context)
             linearLayoutManager.orientation = RecyclerView.VERTICAL
 
-          //  binding.hasFixedSize = true
-            binding.activitiesRecyclerView.layoutManager = linearLayoutManager
-            binding.activitiesRecyclerView.adapter = adapter
-         //   binding.myAdapter = adapter
-           // binding.myLayoutManager = linearLayoutManager
+            binding.layoutManager = linearLayoutManager
+            binding.adapter = adapter
 
-
-          //  val linearLayoutManager = LinearLayoutManager(context)
-          //  linearLayoutManager.orientation = RecyclerView.VERTICAL
-         //   activitiesRecyclerView!!.adapter = adapter
-         //   activitiesRecyclerView!!.layoutManager = linearLayoutManager
             binding.activitiesRecyclerView.viewTreeObserver
                     .addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
                         override fun onGlobalLayout() {
                             mMainViewModel!!.setShowDialog(false)
-                            /*binding.*/activitiesRecyclerView.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                            binding.activitiesRecyclerView.viewTreeObserver.removeOnGlobalLayoutListener(this)
                         }
                     })
             binding.swipeRefresh.isRefreshing = false

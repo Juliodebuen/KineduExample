@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
+        <import type="android.view.View"/>
         <variable
             name="activities"
             type="com.example.kineduexample.data.network.model.Activities"/>
@@ -24,7 +25,7 @@
                     android:layout_gravity="center">
                     <ImageView
                         android:id="@+id/thumbnail"
-                        imageResource="@{activities.thumbnail}"
+                        app:imageResource="@{activities.thumbnail}"
                         android:layout_width="@dimen/thumbnail"
                         android:layout_height="@dimen/thumbnail"
                         android:scaleType="centerCrop" />
@@ -69,35 +70,31 @@
                         android:paddingBottom="@dimen/padding">
                         <ImageView
                             android:id="@+id/check1"
-                            android:visibility="gone"
                             android:layout_width="@dimen/check"
                             android:layout_height="@dimen/check"
                             android:layout_marginRight="@dimen/half_padding"
-                            android:src="@drawable/checked"/>
+                            android:src="@drawable/checked" />
                         <ImageView
                             android:id="@+id/check2"
-                            android:visibility="gone"
                             android:layout_width="@dimen/check"
+                            android:visibility="gone"
                             android:layout_height="@dimen/check"
                             android:layout_marginRight="@dimen/half_padding"
                             android:src="@drawable/checked"/>
                         <ImageView
                             android:id="@+id/check3"
-                            android:visibility="gone"
                             android:layout_width="@dimen/check"
                             android:layout_height="@dimen/check"
                             android:layout_marginRight="@dimen/half_padding"
                             android:src="@drawable/checked"/>
                         <ImageView
                             android:id="@+id/check4"
-                            android:visibility="gone"
                             android:layout_width="@dimen/check"
                             android:layout_height="@dimen/check"
                             android:layout_marginRight="@dimen/half_padding"
                             android:src="@drawable/checked"/>
                         <ImageView
                             android:id="@+id/check5"
-                            android:visibility="gone"
                             android:layout_width="@dimen/check"
                             android:layout_height="@dimen/check"
                             android:layout_marginRight="@dimen/half_padding"

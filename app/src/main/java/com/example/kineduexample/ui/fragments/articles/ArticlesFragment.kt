@@ -44,8 +44,6 @@ class ArticlesFragment : Fragment(), ArticlesView, OnArticleClickListener {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_articles, container, false)
 
         return binding.root
-      //  return inflater.inflate(R.layout.fragment_articles, container, false)
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -82,8 +80,8 @@ class ArticlesFragment : Fragment(), ArticlesView, OnArticleClickListener {
             val linearLayoutManager = LinearLayoutManager(context)
             linearLayoutManager.orientation = RecyclerView.VERTICAL
 
-            binding.articlesRecyclerView.adapter = adapter
-            binding.articlesRecyclerView.layoutManager = linearLayoutManager
+            binding.adapter = adapter
+            binding.layoutManager = linearLayoutManager
             mMainViewModel!!.setShowDialog(false)
             binding.swipeRefresh.isRefreshing = false
         }

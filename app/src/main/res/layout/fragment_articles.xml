@@ -2,10 +2,10 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
-            name="myAdapter"
+            name="adapter"
             type="com.example.kineduexample.ui.fragments.articles.adapter.ArticlesAdapter"/>
         <variable
-            name="myLayoutManager"
+            name="layoutManager"
             type="androidx.recyclerview.widget.LinearLayoutManager"/>
     </data>
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -24,9 +24,9 @@
                     android:id="@+id/articlesRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    app:adapter="@{adapter}"
+                    app:layoutManager="@{layoutManager}"
                     tools:listitem="@layout/articles_item"/>
-                <!--adapter="@{myAdapter}"
-                    layoutManager="@{myLayoutManager}" -->
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
         </LinearLayout>
     </FrameLayout>
