@@ -18,7 +18,6 @@ import com.example.kineduexample.data.network.model.Activities
 import com.example.kineduexample.databinding.ActivitesFragmentBinding
 import com.example.kineduexample.ui.fragments.activities.adapter.ActivitiesAdapter
 import com.example.kineduexample.ui.fragments.MainViewModel
-import kotlinx.android.synthetic.main.activites_fragment.*
 
 class ActivitesFragment : Fragment(), ActivitiesView {
 

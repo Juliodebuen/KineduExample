@@ -1,6 +1,5 @@
 package com.example.kineduexample.ui.article_details
 
-import android.util.Log
 import com.example.kineduexample.data.network.KineduInteractor
 import com.example.kineduexample.data.network.model.ArticleDetailsIndex
 import retrofit2.Call

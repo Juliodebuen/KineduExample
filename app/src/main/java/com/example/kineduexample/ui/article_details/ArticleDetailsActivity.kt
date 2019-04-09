@@ -48,6 +48,10 @@ class ArticleDetailsActivity : BaseActivity(), ArticleDetailsView {
         return true
     }
 
+    override fun onDestroy() {
+        presenter!!.unbind()
+        super.onDestroy()
+    }
     override fun onShareBtnClick(link: String?) {
         val sendIntent = Intent()
         sendIntent.action = Intent.ACTION_SEND

@@ -1,7 +1,6 @@
 package com.example.kineduexample.ui.fragments.articles.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Filter
@@ -10,10 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.example.kineduexample.R
 import com.example.kineduexample.data.network.model.Articles
-import com.squareup.picasso.Picasso
-
 import java.util.ArrayList
-import androidx.cardview.widget.CardView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kineduexample.BR
@@ -53,7 +49,6 @@ class ArticlesAdapter(private val context: Context, private val articlesList: Mu
     }
 
     fun itemClick(id: Int, picture :ImageView, shortDescription :TextView){
-        Log.d("ASDADAD", "ASSSSSSSSSSSS")
         mListener!!.onArticleClick(id, picture, shortDescription)
     }
 

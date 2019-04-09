@@ -22,12 +22,10 @@ import com.example.kineduexample.data.network.KineduInteractor
 import com.example.kineduexample.data.network.KineduInteractorImpl
 import com.example.kineduexample.data.network.model.Articles
 import com.example.kineduexample.databinding.FragmentArticlesBinding
-//import com.example.kineduexample.databinding.FragmentArticlesBinding
 import com.example.kineduexample.ui.article_details.ArticleDetailsActivity
 import com.example.kineduexample.ui.fragments.articles.adapter.ArticlesAdapter
 import com.example.kineduexample.ui.fragments.MainViewModel
 import com.example.kineduexample.ui.fragments.articles.adapter.OnArticleClickListener
-import kotlinx.android.synthetic.main.fragment_articles.*
 
 /**
  * A simple [Fragment] subclass.
