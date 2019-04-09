@@ -4,6 +4,9 @@
         <variable
             name="articleDetail"
             type="com.example.kineduexample.data.network.model.ArticleDetail"/>
+        <variable
+            name="presenter"
+            type="com.example.kineduexample.ui.article_details.ArticleDetailsPresenter"/>
     </data>
     <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -68,6 +71,7 @@
                         android:layout_marginLeft="@dimen/padding"
                         android:layout_marginRight="@dimen/padding"
                         android:src="@drawable/ic_share"
+                        android:onClick="@{() -> presenter.onClick(articleDetail.link)}"
                         android:tint="@color/sharebtn" />
                 </LinearLayout>
             </androidx.appcompat.widget.Toolbar>

@@ -42,7 +42,6 @@ class ArticlesFragment : Fragment(), ArticlesView, OnArticleClickListener {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_articles, container, false)
-
         return binding.root
     }
 

@@ -6,12 +6,19 @@
             type="com.example.kineduexample.data.network.model.Articles"/>
         <variable
             name="itemClickListener"
-            type="com.example.kineduexample.ui.fragments.articles.adapter.OnArticleClickListener"/>
+            type="com.example.kineduexample.ui.fragments.articles.adapter.ArticlesAdapter"/>
+        <variable
+            name="pictureImg"
+            type="android.widget.ImageView"/>
+        <variable
+            name="shortDescriptionTxt"
+            type="android.widget.TextView"/>
     </data>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical" android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <androidx.cardview.widget.CardView
+            android:onClick="@{() -> itemClickListener.itemClick(articles.id, pictureImg, shortDescriptionTxt)}"
             android:id="@+id/article_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

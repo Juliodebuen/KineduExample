@@ -1,6 +1,7 @@
 package com.example.kineduexample.ui.fragments.articles.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Filter
@@ -33,9 +34,7 @@ class ArticlesAdapter(private val context: Context, private val articlesList: Mu
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticlesViewHolder {
-       /* val v = LayoutInflater.from(parent.context).inflate(R.layout.articles_item, parent, false)
-        return ArticlesViewHolder(v)*/
-        var binding: ArticlesItemBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.articles_item, parent, false)
+        val binding: ArticlesItemBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.articles_item, parent, false)
         return ArticlesViewHolder(binding)
     }
 
@@ -45,15 +44,17 @@ class ArticlesAdapter(private val context: Context, private val articlesList: Mu
 
     override fun onBindViewHolder(holder: ArticlesViewHolder, position: Int) {
         val item = getItem(position)
-        /*holder.name!!.text = item.name
-        holder.shortDescription!!.text = item.shortDescription
-        Picasso.with(context).load(item.picture).into(holder.picture)
-*/
-        holder.articleCard!!.setOnClickListener { mListener!!.onArticleClick(item.id!!, holder.picture!!, holder.shortDescription!!) }
 
         holder.itemBinding.articles = item
+        holder.itemBinding.itemClickListener = this
+        holder.itemBinding.pictureImg = holder.itemBinding.picture
+        holder.itemBinding.shortDescriptionTxt = holder.itemBinding.shortDescription
         holder.bind(item)
-        //holder.itemBinding.itemClickListener = mListener
+    }
+
+    fun itemClick(id: Int, picture :ImageView, shortDescription :TextView){
+        Log.d("ASDADAD", "ASSSSSSSSSSSS")
+        mListener!!.onArticleClick(id, picture, shortDescription)
     }
 
     override fun getItemCount(): Int {
@@ -61,18 +62,12 @@ class ArticlesAdapter(private val context: Context, private val articlesList: Mu
     }
 
     inner class ArticlesViewHolder(itemView: ArticlesItemBinding) : RecyclerView.ViewHolder(itemView.root) {
-       // internal var name: TextView? = itemView.name
-        internal var shortDescription: TextView? = itemView.shortDescription
-        internal var picture: ImageView? = itemView.picture
-        internal var articleCard: CardView? = itemView.articleCard
-
         var itemBinding: ArticlesItemBinding = itemView
 
         fun bind(obj: Articles){
             itemBinding.setVariable(BR.articles, obj)
             itemBinding.executePendingBindings()
         }
-
     }
 
     override fun getFilter(): Filter {

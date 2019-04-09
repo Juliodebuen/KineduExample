@@ -27,9 +27,7 @@ class ActivitiesAdapter(private val context: Context, private val activitiesList
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActivitiesViewHolder {
-        /*val v = LayoutInflater.from(parent.context).inflate(R.layout.activities_item, parent, false)
-        return ActivitiesViewHolder(v)*/
-        var binding: ActivitiesItemBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.activities_item, parent, false)
+        val binding: ActivitiesItemBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.activities_item, parent, false)
         return ActivitiesViewHolder(binding)
     }
 

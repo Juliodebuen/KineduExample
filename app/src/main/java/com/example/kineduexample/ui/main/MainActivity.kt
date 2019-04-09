@@ -37,7 +37,6 @@ class MainActivity : BaseActivity(), MainView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.activity_main)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         mMainViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)

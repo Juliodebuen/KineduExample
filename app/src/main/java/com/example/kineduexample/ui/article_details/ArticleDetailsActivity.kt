@@ -16,14 +16,11 @@ class ArticleDetailsActivity : BaseActivity(), ArticleDetailsView {
     private var interactor: KineduInteractor? = null
     private var presenter: ArticleDetailsPresenter? = null
     private var articleId: Int = 0
-    private var articleDetail: ArticleDetail? = null
     private lateinit var binding: ActivityArticleDetailsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-       // setContentView(R.layout.activity_article_details)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_article_details)
-      //  binding.articleDetail = ArticleDetail()
 
         setProgressDialog(getString(R.string.loading))
         setSupportActionBar(toolbar)
@@ -34,18 +31,12 @@ class ArticleDetailsActivity : BaseActivity(), ArticleDetailsView {
         presenter = ArticleDetailsPresenter(interactor as KineduInteractorImpl)
         presenter!!.bind(this)
 
+        binding.presenter = presenter
+
         val extras = intent.extras
         if (extras != null) {
             articleId = extras.getInt("articleId")
             presenter!!.searchArticleDetails(articleId)
-        }
-
-        shareImg!!.setOnClickListener {
-            val sendIntent = Intent()
-            sendIntent.action = Intent.ACTION_SEND
-            sendIntent.putExtra(Intent.EXTRA_TEXT, articleDetail!!.link)
-            sendIntent.type = "text/plain"
-            startActivity(Intent.createChooser(sendIntent, resources.getString(R.string.share)))
         }
 
         ViewCompat.setTransitionName(picture!!, VIEW_NAME_HEADER_IMAGE)
@@ -57,8 +48,15 @@ class ArticleDetailsActivity : BaseActivity(), ArticleDetailsView {
         return true
     }
 
+    override fun onShareBtnClick(link: String?) {
+        val sendIntent = Intent()
+        sendIntent.action = Intent.ACTION_SEND
+        sendIntent.putExtra(Intent.EXTRA_TEXT, link)
+        sendIntent.type = "text/plain"
+        startActivity(Intent.createChooser(sendIntent, resources.getString(R.string.share)))
+    }
+
     override fun onLoadArticleDetails(articleDetail: ArticleDetail) {
-        this.articleDetail = articleDetail
         binding.articleDetail = articleDetail
     }
 
