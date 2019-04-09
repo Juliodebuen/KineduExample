@@ -5,10 +5,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Html
 import android.text.method.LinkMovementMethod
+import androidx.databinding.DataBindingUtil
 import com.example.kineduexample.R
 import com.example.kineduexample.data.network.KineduInteractor
 import com.example.kineduexample.data.network.KineduInteractorImpl
 import com.example.kineduexample.data.network.model.ArticleDetail
+import com.example.kineduexample.databinding.ActivityArticleDetailsBinding
 import com.example.kineduexample.ui.base.BaseActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_article_details.*
@@ -18,10 +20,13 @@ class ArticleDetailsActivity : BaseActivity(), ArticleDetailsView {
     private var presenter: ArticleDetailsPresenter? = null
     private var articleId: Int = 0
     private var articleDetail: ArticleDetail? = null
+    private lateinit var binding: ActivityArticleDetailsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_article_details)
+       // setContentView(R.layout.activity_article_details)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_article_details)
+
         setProgressDialog(getString(R.string.loading))
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
@@ -57,9 +62,14 @@ class ArticleDetailsActivity : BaseActivity(), ArticleDetailsView {
     override fun onLoadArticleDetails(articleDetail: ArticleDetail) {
         this.articleDetail = articleDetail
 
-        body!!.text = Html.fromHtml(articleDetail.body, Html.FROM_HTML_MODE_LEGACY)
-        body!!.movementMethod = LinkMovementMethod.getInstance()
-        tTitle!!.text = articleDetail.title
+        var articleObserver = ArticleObserver()
+        articleObserver.body = "texto"
+        articleObserver.tTitle = articleDetail.title!!
+        binding.articleObserver = articleObserver
+
+      //  body!!.text = Html.fromHtml(articleDetail.body, Html.FROM_HTML_MODE_LEGACY)
+       // body!!.movementMethod = LinkMovementMethod.getInstance()
+       // tTitle!!.text = articleDetail.title
        /* Picasso.with(applicationContext).load(articleDetail.picture)
                 .noFade()
                 .into(picture)*/

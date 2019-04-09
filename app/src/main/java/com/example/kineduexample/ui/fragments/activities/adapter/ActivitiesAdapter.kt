@@ -8,12 +8,13 @@ import android.widget.Filter
 import android.widget.Filterable
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import com.example.kineduexample.R
 import com.example.kineduexample.data.network.model.Activities
-import com.squareup.picasso.Picasso
-import java.util.ArrayList
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.activities_item.view.*
+import com.example.kineduexample.BR
+import com.example.kineduexample.databinding.ActivitiesItemBinding
+import java.util.*
 
 class ActivitiesAdapter(private val context: Context, private val activitiesList: MutableList<Activities>) : RecyclerView.Adapter<ActivitiesAdapter.ActivitiesViewHolder>(), Filterable {
     private var filteredData: List<Activities>? = null
@@ -26,8 +27,10 @@ class ActivitiesAdapter(private val context: Context, private val activitiesList
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActivitiesViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.activities_item, parent, false)
-        return ActivitiesViewHolder(v)
+        /*val v = LayoutInflater.from(parent.context).inflate(R.layout.activities_item, parent, false)
+        return ActivitiesViewHolder(v)*/
+        var binding: ActivitiesItemBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.activities_item, parent, false)
+        return ActivitiesViewHolder(binding)
     }
 
     fun getItem(position: Int): Activities {
@@ -36,9 +39,11 @@ class ActivitiesAdapter(private val context: Context, private val activitiesList
 
     override fun onBindViewHolder(holder: ActivitiesViewHolder, position: Int) {
         val item = getItem(position)
-        holder.name!!.text = item.name
+       /* holder.name!!.text = item.name
         holder.purpose!!.text = item.purpose
-        Picasso.with(context).load(item.thumbnail).into(holder.thumbnail)
+        Picasso.with(context).load(item.thumbnail).into(holder.thumbnail)*/
+        holder.itemBinding.activities = item
+        holder.bind(item)
         holder.milestonesNumber(item.activeMilestones!!)
     }
 
@@ -47,15 +52,23 @@ class ActivitiesAdapter(private val context: Context, private val activitiesList
     }
 
 
-    inner class ActivitiesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        internal var thumbnail: ImageView? = itemView.thumbnail
+    inner class ActivitiesViewHolder(itemView: ActivitiesItemBinding) : RecyclerView.ViewHolder(itemView.root) {
+        /*internal var thumbnail: ImageView? = itemView.thumbnail
         internal var name: TextView? = itemView.name
-        internal var purpose: TextView? = itemView.purpose
+        internal var purpose: TextView? = itemView.purpose*/
         internal var check1: ImageView? = itemView.check1
         internal var check2: ImageView? = itemView.check2
         internal var check3: ImageView? = itemView.check3
         internal var check4: ImageView? = itemView.check4
         internal var check5: ImageView? = itemView.check5
+
+
+        var itemBinding: ActivitiesItemBinding = itemView
+
+        fun bind(obj: Activities){
+            itemBinding.setVariable(BR.activities, obj)
+            itemBinding.executePendingBindings()
+        }
 
         fun milestonesNumber(value: Int) {
             clearAll()

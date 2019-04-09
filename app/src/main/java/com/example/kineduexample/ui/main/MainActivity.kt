@@ -7,10 +7,12 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import com.example.kineduexample.R
 import com.example.kineduexample.data.network.KineduInteractor
 import com.example.kineduexample.data.network.KineduInteractorImpl
 import com.example.kineduexample.data.network.model.DataActivities
+import com.example.kineduexample.databinding.ActivityMainBinding
 import com.example.kineduexample.ui.base.BaseActivity
 import com.example.kineduexample.ui.fragments.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -20,6 +22,7 @@ class MainActivity : BaseActivity(), MainView {
     private var presenter: MainPresenter? = null
     private var viewPagerAdapter: ViewPagerAdapter? = null
     private var mMainViewModel: MainViewModel? = null
+    private lateinit var binding: ActivityMainBinding
 
     private val listener = object : AdapterView.OnItemSelectedListener {
         override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
@@ -34,7 +37,9 @@ class MainActivity : BaseActivity(), MainView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        //setContentView(R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+
         mMainViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         setProgressDialog(getString(R.string.loading))
 

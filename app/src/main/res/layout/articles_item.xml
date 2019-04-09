@@ -1,40 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <androidx.cardview.widget.CardView
-        android:id="@+id/article_card"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/padding"
-        android:padding="@dimen/padding"
-        android:elevation="@dimen/padding">
-        <LinearLayout
+<layout>
+    <data>
+        <variable
+            name="articles"
+            type="com.example.kineduexample.data.network.model.Articles"/>
+        <variable
+            name="itemClickListener"
+            type="com.example.kineduexample.ui.fragments.articles.adapter.OnArticleClickListener"/>
+    </data>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/article_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <ImageView
-                android:id="@+id/picture"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/picture"
-                android:scaleType="centerCrop"/>
-            <TextView
-                android:id="@+id/name"
+            android:layout_marginBottom="@dimen/padding"
+            android:padding="@dimen/padding"
+            android:elevation="@dimen/padding">
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/title"
-                android:textColor="@color/title_activities"
-                android:textStyle="bold"
-                android:paddingLeft="@dimen/padding"
-                android:paddingRight="@dimen/padding"/>
-            <TextView
-                android:id="@+id/short_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/normal"
-                android:paddingLeft="@dimen/padding"
-                android:paddingRight="@dimen/padding"
-                android:layout_marginBottom="@dimen/padding"/>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-</LinearLayout>
+                android:orientation="vertical">
+                <ImageView
+                    android:id="@+id/picture"
+                    imageResource="@{articles.picture}"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/picture"
+                    android:scaleType="centerCrop"/>
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/title"
+                    android:textColor="@color/title_activities"
+                    android:textStyle="bold"
+                    android:text="@{articles.name}"
+                    android:paddingLeft="@dimen/padding"
+                    android:paddingRight="@dimen/padding"/>
+                <TextView
+                    android:id="@+id/short_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/normal"
+                    android:text="@{articles.shortDescription}"
+                    android:paddingLeft="@dimen/padding"
+                    android:paddingRight="@dimen/padding"
+                    android:layout_marginBottom="@dimen/padding"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</layout>

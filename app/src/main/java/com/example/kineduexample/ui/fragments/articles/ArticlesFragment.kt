@@ -22,6 +22,7 @@ import com.example.kineduexample.data.network.KineduInteractor
 import com.example.kineduexample.data.network.KineduInteractorImpl
 import com.example.kineduexample.data.network.model.Articles
 import com.example.kineduexample.databinding.FragmentArticlesBinding
+//import com.example.kineduexample.databinding.FragmentArticlesBinding
 import com.example.kineduexample.ui.article_details.ArticleDetailsActivity
 import com.example.kineduexample.ui.fragments.articles.adapter.ArticlesAdapter
 import com.example.kineduexample.ui.fragments.MainViewModel
@@ -36,13 +37,15 @@ class ArticlesFragment : Fragment(), ArticlesView, OnArticleClickListener {
     private var presenter: ArticlesPresenter? = null
     private var mMainViewModel: MainViewModel? = null
     private var adapter: ArticlesAdapter? = null
-    private lateinit var binding : FragmentArticlesBinding;
+    private lateinit var binding : FragmentArticlesBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_articles, container, false)
 
         return binding.root
+      //  return inflater.inflate(R.layout.fragment_articles, container, false)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -79,12 +82,9 @@ class ArticlesFragment : Fragment(), ArticlesView, OnArticleClickListener {
             val linearLayoutManager = LinearLayoutManager(context)
             linearLayoutManager.orientation = RecyclerView.VERTICAL
 
-            binding.myAdapter = adapter
-            binding.myLayoutManager = linearLayoutManager
-
-        //    articlesRecyclerView!!.adapter =
-         //   articlesRecyclerView!!.layoutManager = linearLayoutManager
-            // mMainViewModel.setShowDialog(false);
+            binding.articlesRecyclerView.adapter = adapter
+            binding.articlesRecyclerView.layoutManager = linearLayoutManager
+            mMainViewModel!!.setShowDialog(false)
             binding.swipeRefresh.isRefreshing = false
         }
     }

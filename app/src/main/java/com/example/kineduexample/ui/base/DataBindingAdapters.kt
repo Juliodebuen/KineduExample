@@ -1,6 +1,5 @@
 package com.example.kineduexample.ui.base
 
-import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import android.widget.TextView
 
@@ -15,9 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kineduexample.ui.fragments.articles.adapter.ArticlesAdapter
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_article_details.*
 
 object DataBindingAdapters {
+    @JvmStatic
     @BindingAdapter("imageResource")
     fun setImageDrawable(view: ImageView, picture: String) {
         //view.setImageDrawable(drawable)
@@ -26,26 +25,31 @@ object DataBindingAdapters {
                 .into(view)
     }
 
+    @JvmStatic
     @BindingAdapter("adapter")
     fun setAdapter(recyclerView: RecyclerView, adapter: ActivitiesAdapter) {
         recyclerView.adapter = adapter
     }
 
+    @JvmStatic
     @BindingAdapter("adapter")
     fun setAdapter(recyclerView: RecyclerView, adapter: ArticlesAdapter) {
         recyclerView.adapter = adapter
     }
 
+    @JvmStatic
     @BindingAdapter("layoutManager")
     fun setLayoutManager(recyclerView: RecyclerView, layoutManager: LinearLayoutManager) {
         recyclerView.layoutManager = layoutManager
     }
 
+    @JvmStatic
     @BindingAdapter("fixedSize")
     fun setFixedSize(recyclerView: RecyclerView, fixedSize: Boolean){
         recyclerView.setHasFixedSize(fixedSize)
     }
 
+    @JvmStatic
     @BindingAdapter("date")
     fun setDate(textView: TextView, date: Date) {
         val myFormat = "dd/MM/yyyy"

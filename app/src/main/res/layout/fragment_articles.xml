@@ -24,9 +24,9 @@
                     android:id="@+id/articlesRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    adapter="@{myAdapter}"
-                    layoutManager="@{myLayoutManager}"
                     tools:listitem="@layout/articles_item"/>
+                <!--adapter="@{myAdapter}"
+                    layoutManager="@{myLayoutManager}" -->
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
         </LinearLayout>
     </FrameLayout>

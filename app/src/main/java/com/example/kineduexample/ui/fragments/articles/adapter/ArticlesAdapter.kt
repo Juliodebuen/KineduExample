@@ -2,7 +2,6 @@ package com.example.kineduexample.ui.fragments.articles.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
@@ -14,8 +13,10 @@ import com.squareup.picasso.Picasso
 
 import java.util.ArrayList
 import androidx.cardview.widget.CardView
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.articles_item.view.*
+import com.example.kineduexample.BR
+import com.example.kineduexample.databinding.ArticlesItemBinding
 
 class ArticlesAdapter(private val context: Context, private val articlesList: MutableList<Articles>) : RecyclerView.Adapter<ArticlesAdapter.ArticlesViewHolder>(), Filterable {
     private var filteredData: List<Articles>? = null
@@ -32,8 +33,10 @@ class ArticlesAdapter(private val context: Context, private val articlesList: Mu
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticlesViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.articles_item, parent, false)
-        return ArticlesViewHolder(v)
+       /* val v = LayoutInflater.from(parent.context).inflate(R.layout.articles_item, parent, false)
+        return ArticlesViewHolder(v)*/
+        var binding: ArticlesItemBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.articles_item, parent, false)
+        return ArticlesViewHolder(binding)
     }
 
     fun getItem(position: Int): Articles {
@@ -42,34 +45,34 @@ class ArticlesAdapter(private val context: Context, private val articlesList: Mu
 
     override fun onBindViewHolder(holder: ArticlesViewHolder, position: Int) {
         val item = getItem(position)
-        holder.name!!.text = item.name
+        /*holder.name!!.text = item.name
         holder.shortDescription!!.text = item.shortDescription
         Picasso.with(context).load(item.picture).into(holder.picture)
-
+*/
         holder.articleCard!!.setOnClickListener { mListener!!.onArticleClick(item.id!!, holder.picture!!, holder.shortDescription!!) }
 
+        holder.itemBinding.articles = item
+        holder.bind(item)
+        //holder.itemBinding.itemClickListener = mListener
     }
 
     override fun getItemCount(): Int {
         return filteredData!!.size
     }
 
-    inner class ArticlesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-   //     @BindView(R.id.name)
-        internal var name: TextView? = itemView.name
-
-     //   @BindView(R.id.short_description)
-        internal var shortDescription: TextView? = itemView.short_description
-
-    //    @BindView(R.id.picture)
+    inner class ArticlesViewHolder(itemView: ArticlesItemBinding) : RecyclerView.ViewHolder(itemView.root) {
+       // internal var name: TextView? = itemView.name
+        internal var shortDescription: TextView? = itemView.shortDescription
         internal var picture: ImageView? = itemView.picture
+        internal var articleCard: CardView? = itemView.articleCard
 
-     //   @BindView(R.id.article_card)
-        internal var articleCard: CardView? = itemView.article_card
+        var itemBinding: ArticlesItemBinding = itemView
 
-        init {
-        //    ButterKnife.bind(this, itemView.rootView)
+        fun bind(obj: Articles){
+            itemBinding.setVariable(BR.articles, obj)
+            itemBinding.executePendingBindings()
         }
+
     }
 
     override fun getFilter(): Filter {
