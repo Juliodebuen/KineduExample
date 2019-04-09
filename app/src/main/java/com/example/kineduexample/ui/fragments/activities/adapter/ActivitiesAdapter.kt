@@ -41,7 +41,6 @@ class ActivitiesAdapter(private val context: Context, private val activitiesList
         val item = getItem(position)
         holder.itemBinding.activities = item
         holder.bind(item)
-        holder.milestonesNumber(item.activeMilestones!!)
     }
 
     override fun getItemCount(): Int {
@@ -50,55 +49,11 @@ class ActivitiesAdapter(private val context: Context, private val activitiesList
 
 
     inner class ActivitiesViewHolder(itemView: ActivitiesItemBinding) : RecyclerView.ViewHolder(itemView.root) {
-        internal var check1: ImageView? = itemView.check1
-        internal var check2: ImageView? = itemView.check2
-        internal var check3: ImageView? = itemView.check3
-        internal var check4: ImageView? = itemView.check4
-        internal var check5: ImageView? = itemView.check5
-
-
         var itemBinding: ActivitiesItemBinding = itemView
 
         fun bind(obj: Activities){
             itemBinding.setVariable(BR.activities, obj)
             itemBinding.executePendingBindings()
-        }
-
-        fun milestonesNumber(value: Int) {
-            clearAll()
-            when (value) {
-                5 -> {
-                    check1!!.visibility = View.VISIBLE
-                    check2!!.visibility = View.VISIBLE
-                    check3!!.visibility = View.VISIBLE
-                    check4!!.visibility = View.VISIBLE
-                    check5!!.visibility = View.VISIBLE
-                }
-                4 -> {
-                    check2!!.visibility = View.VISIBLE
-                    check3!!.visibility = View.VISIBLE
-                    check4!!.visibility = View.VISIBLE
-                    check5!!.visibility = View.VISIBLE
-                }
-                3 -> {
-                    check3!!.visibility = View.VISIBLE
-                    check4!!.visibility = View.VISIBLE
-                    check5!!.visibility = View.VISIBLE
-                }
-                2 -> {
-                    check4!!.visibility = View.VISIBLE
-                    check5!!.visibility = View.VISIBLE
-                }
-                1 -> check5!!.visibility = View.VISIBLE
-            }
-        }
-
-        private fun clearAll() {
-            check1!!.visibility = View.GONE
-            check2!!.visibility = View.GONE
-            check3!!.visibility = View.GONE
-            check4!!.visibility = View.GONE
-            check5!!.visibility = View.GONE
         }
     }
 

@@ -72,31 +72,35 @@
                             android:id="@+id/check1"
                             android:layout_width="@dimen/check"
                             android:layout_height="@dimen/check"
+                            android:visibility="@{activities.activeMilestones > 4 ? View.VISIBLE : View.GONE}"
                             android:layout_marginRight="@dimen/half_padding"
                             android:src="@drawable/checked" />
                         <ImageView
                             android:id="@+id/check2"
                             android:layout_width="@dimen/check"
-                            android:visibility="gone"
                             android:layout_height="@dimen/check"
+                            android:visibility="@{activities.activeMilestones > 3 ? View.VISIBLE : View.GONE}"
                             android:layout_marginRight="@dimen/half_padding"
                             android:src="@drawable/checked"/>
                         <ImageView
                             android:id="@+id/check3"
                             android:layout_width="@dimen/check"
                             android:layout_height="@dimen/check"
+                            android:visibility="@{activities.activeMilestones > 2 ? View.VISIBLE : View.GONE}"
                             android:layout_marginRight="@dimen/half_padding"
                             android:src="@drawable/checked"/>
                         <ImageView
                             android:id="@+id/check4"
                             android:layout_width="@dimen/check"
                             android:layout_height="@dimen/check"
+                            android:visibility="@{activities.activeMilestones > 1 ? View.VISIBLE : View.GONE}"
                             android:layout_marginRight="@dimen/half_padding"
                             android:src="@drawable/checked"/>
                         <ImageView
                             android:id="@+id/check5"
                             android:layout_width="@dimen/check"
                             android:layout_height="@dimen/check"
+                            android:visibility="@{activities.activeMilestones > 0 ? View.VISIBLE : View.GONE}"
                             android:layout_marginRight="@dimen/half_padding"
                             android:src="@drawable/checked"/>
                     </LinearLayout>
